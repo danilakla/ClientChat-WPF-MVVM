@@ -1,0 +1,32 @@
+﻿<Window x:Class="ClientChat_WPF_MVVM.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClientChat_WPF_MVVM"
+        xmlns:vms="clr-namespace:ClientChat_WPF_MVVM.ViewModel"
+                xmlns:views="clr-namespace:ClientChat_WPF_MVVM.View"
+
+        mc:Ignorable="d"
+          WindowStartupLocation="CenterScreen" 
+        WindowStyle="None"
+        AllowsTransparency="True" 
+        Background="Transparent" 
+        Height="500" 
+        Width="800"
+        Title="Login"
+        Icon="D:\asp\ClientChat-WPF-MVVM\ClientChat-WPF-MVVM\CustomUI\pagseguro_logo_icon_248258.ico">
+    <Grid           Margin="20 10" >
+        <Grid.Resources>
+            
+            <DataTemplate DataType="{x:Type vms:LoginViewModel}">
+                <views:LoginControl />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:RegistrationViewModel}">
+                <views:RegistrationControl />
+            </DataTemplate>
+        </Grid.Resources>
+
+        <ContentControl Content="{Binding CurrentViewModel}" />
+    </Grid>
+</Window>
