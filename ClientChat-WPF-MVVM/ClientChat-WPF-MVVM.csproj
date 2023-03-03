@@ -24,6 +24,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ToggleButtonTest\ToggleButtonTest.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="CustomUI\aero hithlight.cur">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -52,7 +56,8 @@
 
   <ItemGroup>
     <None Update="appsettings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory> 
+		    
     </None>
   </ItemGroup>
 

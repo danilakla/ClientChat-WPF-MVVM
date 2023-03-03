@@ -5,6 +5,7 @@ using ClientChat_WPF_MVVM.Model;
 using ClientChat_WPF_MVVM.Services;
 using ClientChat_WPF_MVVM.Services.API.Authentication;
 using ClientChat_WPF_MVVM.Services.JsonSerialization;
+using ClientChat_WPF_MVVM.Services.LoggerService;
 using ClientChat_WPF_MVVM.Services.Serialization;
 using ClientChat_WPF_MVVM.Services.TokentServices;
 using ClientChat_WPF_MVVM.Strore;
@@ -47,6 +48,9 @@ public partial class App : Application
 
                 services.AddSingleton<ISerialization,SerializationServices>();
                 services.AddSingleton<TokenServieces>();
+                services.AddSingleton<Logger>();
+                services.AddSingleton<UndoRedoStoreStringSearch>();
+
                 services.AddSingleton<AuthUserService<UserAuthInfoModel>>();
                 services.AddSingleton(new HttpConnection(hostContext.Configuration.GetValue<string>("ServerUrl")));
 
@@ -77,16 +81,19 @@ public partial class App : Application
         MainWindow.Show();
         MainWindow.Cursor = new System.Windows.Input.Cursor(Application.GetResourceStream(new Uri(@"./CustomUI/Circle.cur", UriKind.Relative)).Stream);
         ResourceDictionary dict = new ResourceDictionary();
-        switch (Thread.CurrentThread.CurrentCulture.ToString())
-        {
-            case "en-US":
-                dict.Source = new Uri("D:\\asp\\ClientChat-WPF-MVVM\\ClientChat-WPF-MVVM\\View\\Resource\\StringResourceEN.xaml");
-                break;
-            case "ru-RU":
-                dict.Source = new Uri("D:\\asp\\ClientChat-WPF-MVVM\\ClientChat-WPF-MVVM\\View\\Resource\\StringResourceRU.xaml");
-                break;
+        //switch (Thread.CurrentThread.CurrentCulture.ToString())
+        //{
+        //    case "en-US":
+        //        dict.Source = new Uri("D:\\asp\\ClientChat-WPF-MVVM\\ClientChat-WPF-MVVM\\View\\Resource\\StringResourceEN.xaml");
+        //        break;
+        //    case "ru-RU":
+        //        dict.Source = new Uri("D:\\asp\\ClientChat-WPF-MVVM\\ClientChat-WPF-MVVM\\View\\Resource\\StringResourceRU.xaml");
+        //        break;
 
-        }
+        //}
+
+        dict.Source = new Uri("D:\\asp\\ClientChat-WPF-MVVM\\ClientChat-WPF-MVVM\\View\\Resource\\StringResourceEN.xaml");
+
 
         MainWindow.Resources.MergedDictionaries.Add(dict);
 

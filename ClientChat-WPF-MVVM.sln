@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33103.184
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientChat-WPF-MVVM", "ClientChat-WPF-MVVM\ClientChat-WPF-MVVM.csproj", "{D51593D3-2570-4634-B853-E70FCC340FEE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientChat-WPF-MVVM", "ClientChat-WPF-MVVM\ClientChat-WPF-MVVM.csproj", "{D51593D3-2570-4634-B853-E70FCC340FEE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToggleButtonTest", "ToggleButtonTest\ToggleButtonTest.csproj", "{4D7A85B9-5223-47CD-A05D-1DAD02C74E5D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{D51593D3-2570-4634-B853-E70FCC340FEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D51593D3-2570-4634-B853-E70FCC340FEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D51593D3-2570-4634-B853-E70FCC340FEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D7A85B9-5223-47CD-A05D-1DAD02C74E5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D7A85B9-5223-47CD-A05D-1DAD02C74E5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D7A85B9-5223-47CD-A05D-1DAD02C74E5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D7A85B9-5223-47CD-A05D-1DAD02C74E5D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

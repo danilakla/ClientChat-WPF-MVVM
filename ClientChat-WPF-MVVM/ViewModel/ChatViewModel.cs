@@ -1,9 +1,13 @@
 using ClientChat_WPF_MVVM.Commands;
 using ClientChat_WPF_MVVM.Commands.ChatCommand;
+using ClientChat_WPF_MVVM.Commands.UndoRedoCommand;
+using ClientChat_WPF_MVVM.Commands.UtilCommand;
 using ClientChat_WPF_MVVM.Model;
 using ClientChat_WPF_MVVM.Model.ChatModels;
 using ClientChat_WPF_MVVM.Services;
 using ClientChat_WPF_MVVM.Services.API.Authentication;
+using ClientChat_WPF_MVVM.Services.LoggerService;
+using ClientChat_WPF_MVVM.Strore;
 using ClientChat_WPF_MVVM.View;
 using ClientChat_WPF_MVVM.ViewModel;
 using System.Collections.Generic;
@@ -221,13 +225,17 @@ public class ChatViewModel : ViewModelBase
     public ICommand OpenModalDialogCommand { get; }
     public ICommand AddFriendCommand { get; }
     public ICommand UpDataUserDataCommand { get; }
+    public ICommand CommandToBindTo { get; }
 
+
+    public ICommand UndoCommand { get; }
+    public ICommand RedoCommand { get; }
 
 
     public ICommand ChangeUserCommand { get; }
 
     public ChatViewModel(UserStoreServices userStoreServices,
-        NavigationWindowService<ChatView> navigationWindowService)
+        NavigationWindowService<ChatView> navigationWindowService,Logger logger,UndoRedoStoreStringSearch undoRedoStringSearch)
     {
 
         MessagesForSelectedConversation = new();
@@ -239,6 +247,10 @@ public class ChatViewModel : ViewModelBase
         OpenModalDialogCommand = new OpenModalDialogCommand(navigationWindowService);
         AddFriendCommand = new AddFriendCommand(this);
         LoadDataCommand = new LoadedCommand(this, userStoreServices);
+        CommandToBindTo = new LoggerCommand(logger);
+        UndoCommand = new UndoCommand(this, undoRedoStringSearch);
+        RedoCommand = new RedoCommand(this, undoRedoStringSearch);
+
         LoadDataCommand.Execute(null);
         FindFriend = "";
 
