@@ -12,7 +12,7 @@
         mc:Ignorable="d"
         Title="ChatView" 
             Height="650" Width="1200"
-        Background="#36393f"
+        Style="{DynamicResource WindowStyle}"
         ResizeMode="CanResizeWithGrip"
         WindowStyle="None"
         AllowsTransparency="True"
@@ -31,6 +31,8 @@
                 <ResourceDictionary Source="./Themes/MessageBox.xaml"/>
                 <ResourceDictionary Source="./Themes/StylishScrollbar.xaml"/>
 
+                <ResourceDictionary Source="./StyleTheme/DarkStyle.xaml"/>
+                <ResourceDictionary Source="./StyleTheme/LightStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -84,7 +86,7 @@
                     </StackPanel>
                 </Grid>
             </Border>
-            <Grid Background="#2F3136" Grid.Row="1" >
+            <Grid  Grid.Row="1" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="25"/>
                     <RowDefinition Height="30"/>
@@ -97,8 +99,8 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Width="80" Content="Undo" Command="{Binding UndoCommand}" />
-                    <Button Grid.Column="1" Width="80" Content="Redo" Command="{Binding RedoCommand}"/>
+                    <Button Grid.Column="0" Width="80" Content="Undo" Command="{Binding UndoCommand}" Style="{DynamicResource ButtonStyle}" />
+                    <Button Grid.Column="1" Width="80" Content="Redo" Command="{Binding RedoCommand}" Style="{DynamicResource ButtonStyle}"/>
                 </Grid>
 
                
@@ -128,7 +130,7 @@
                 </ListView>
                 <StackPanel Grid.Row="3"
                         Orientation="Horizontal"
-                        Background="#292B2F">
+                        Style="{DynamicResource StackPanelStyle}">
                     <Image 
                         Width="30" 
                     Source="{Binding User.profileImage}"
@@ -136,12 +138,12 @@
                         Margin="18 0 0 0"/>
                     <StackPanel VerticalAlignment="Center">
                         <Label Content="{Binding User.Email}"
-                           Foreground="White"
+                                Style="{DynamicResource TextStyle}"
                            FontWeight="SemiBold"
                            Margin="0 -5 0 -5"/>
 
                         <Label Content="Custom Status"
-                           Foreground="Gray"
+                                Style="{DynamicResource TextStyle}"
                            FontWeight="SemiBold"
                            FontSize="10"
                            Margin="0 -8 0 -5"/>
@@ -155,13 +157,14 @@
                     <RowDefinition/>
                     <RowDefinition Height="70"/>
                 </Grid.RowDefinitions>
-                <Border
-                BorderBrush="#2f3136"
-                BorderThickness="0 0 0 2">
+                <Border           
+                    Style="{DynamicResource BorderStyle}"
+
+                    BorderThickness="0 0 0 2">
                     <Grid HorizontalAlignment="Stretch"
                       Margin="8">
                         <Label Content="{Binding SelectedConversation.FriendProfile.Email}"
-                           Foreground="White"
+                    Style="{DynamicResource TextStyle}"
                            FontWeight="Bold"
                            Margin="5 0 5 0"
                            VerticalAlignment="Center"/>
@@ -170,8 +173,7 @@
                             <CustomButton:CustomControl1>
                                 <b:Interaction.Triggers>
                                     <b:EventTrigger EventName="Click">
-                                        <b:InvokeCommandAction Command="{Binding CommandToBindTo}"
-                              />
+                                        <b:InvokeCommandAction Command="{Binding CommandToBindTo}"/>
                                     </b:EventTrigger>
                                 </b:Interaction.Triggers>
                             </CustomButton:CustomControl1>

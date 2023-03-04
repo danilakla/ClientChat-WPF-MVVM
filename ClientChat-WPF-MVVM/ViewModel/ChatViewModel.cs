@@ -148,6 +148,19 @@ public class ChatViewModel : ViewModelBase
         }
     }
 
+
+    private bool _isSetStyle=false;
+
+    public bool IsSetStyle
+    {
+        get { return _isSetStyle; }
+        set
+        {
+            _isSetStyle = value;
+            OnPropertyChanged(nameof(IsSetStyle));
+        }
+    }
+
     private string _message;
 
     public string Message
@@ -235,7 +248,10 @@ public class ChatViewModel : ViewModelBase
     public ICommand ChangeUserCommand { get; }
 
     public ChatViewModel(UserStoreServices userStoreServices,
-        NavigationWindowService<ChatView> navigationWindowService,Logger logger,UndoRedoStoreStringSearch undoRedoStringSearch)
+        NavigationWindowService<ChatView> navigationWindowService,
+        Logger logger,
+        UndoRedoStoreStringSearch undoRedoStringSearch ,
+        ChatView chatView)
     {
 
         MessagesForSelectedConversation = new();
@@ -247,7 +263,7 @@ public class ChatViewModel : ViewModelBase
         OpenModalDialogCommand = new OpenModalDialogCommand(navigationWindowService);
         AddFriendCommand = new AddFriendCommand(this);
         LoadDataCommand = new LoadedCommand(this, userStoreServices);
-        CommandToBindTo = new LoggerCommand(logger);
+        CommandToBindTo = new LoggerCommand(logger, chatView,this);
         UndoCommand = new UndoCommand(this, undoRedoStringSearch);
         RedoCommand = new RedoCommand(this, undoRedoStringSearch);
 

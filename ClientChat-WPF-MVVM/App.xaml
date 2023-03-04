@@ -4,6 +4,9 @@
              xmlns:local="clr-namespace:ClientChat_WPF_MVVM"
             >
     <Application.Resources>
+        
+
+       
         <BooleanToVisibilityConverter x:Key="VisibilityOfBool" />
 
         <Style x:Key="TitleText" TargetType="TextBlock">
