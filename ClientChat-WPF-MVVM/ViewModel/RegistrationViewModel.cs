@@ -1,4 +1,5 @@
-﻿using ClientChat_WPF_MVVM.Model;
+﻿using ClientChat_WPF_MVVM.Commands;
+using ClientChat_WPF_MVVM.Model;
 using ClientChat_WPF_MVVM.Services;
 using ClientChat_WPF_MVVM.Services.API.Authentication;
 using ClientChat_WPF_MVVM.Services.TokentServices;
@@ -6,6 +7,7 @@ using ClientChat_WPF_MVVM.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -31,11 +33,14 @@ public class RegistrationViewModel:ViewModelBase
         get { return _password; }
         set
         {
+            
             _password = value;
             OnPropertyChanged("Password");
         }
     }
     public ICommand NavigateToLoginCommand { get; }
+    public ICommand TestCommand11 { get; }
+
 
     public ICommand RegistrationUserAccountCommand { get; }
 
@@ -48,7 +53,7 @@ public class RegistrationViewModel:ViewModelBase
     {
         NavigateToLoginCommand = new NavigateCommand<LoginViewModel>(navigateSerivceRegViewModel);
         RegistrationUserAccountCommand = new RegistrationUserAccountCommand<ChatView,ChatViewModel>(navigationWindowCommand, navigateSerivceChatViewModel, authUserService, this,tokenSerivece, userStoreServices);
-
+        TestCommand11 = new DebugCommand();
     }
 
     public ICommand LoginUserCommand { get; }

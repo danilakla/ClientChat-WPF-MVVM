@@ -9,12 +9,21 @@
              HorizontalAlignment="Stretch"
              VerticalAlignment="Stretch"
              >
+    <UserControl.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../StyleTheme/DarkStyle.xaml"/>
+                <ResourceDictionary Source="../StyleTheme/LightStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+
+    </UserControl.Resources>
     <Grid>
-        <Rectangle Fill="Gray" Opacity="0.3" MouseDown="Rectangle_MouseDown"/>
+        <Rectangle Fill="Gray" Opacity="0.3" MouseDown="Rectangle_MouseDown" />
         <Border CornerRadius="10"
-                Background="White"
-                Height="100"
-                Width="Auto"
+                Background="#FF3B4042"
+                Height="90"
+                Width="120"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center">
             <Grid Margin="5">
@@ -22,14 +31,12 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
 
                 </Grid.RowDefinitions>
-                <TextBlock Text="{Binding Text}" Grid.Row="0"/>
-                <Separator Grid.Row="1" BorderBrush="Silver" BorderThickness="1"/>
-                <TextBox Grid.Row="2" Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}"/>
-                <Button Grid.Row="3" Content="Add friend" Command="{Binding AddFriendCommand}"/>
-
+                <Separator Grid.Row="0" Margin="0 10 0 0" BorderBrush="#FF636E71" BorderThickness="1"/>
+                <TextBox Grid.Row="1" TextChanged="Content_TextChanged" Margin="0 3 0 0" x:Name="Content"  Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}" Background="#FF566377" Foreground="White" />
+                <Button Grid.Row="2" Margin="0 10 0 0"  Content="Add friend"  Style="{DynamicResource ButtonStyle}" Command="{Binding AddFriendCommand}"/>
+ 
             </Grid>
         </Border>
     </Grid>

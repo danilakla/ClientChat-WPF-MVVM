@@ -20,6 +20,58 @@ namespace ClientChat_WPF_MVVM.View.CustomControls
     /// </summary>
     public partial class CustomModalDialog : UserControl
     {
+        public static readonly DependencyProperty nameOfFriend =
+    DependencyProperty.Register("AddFriend", typeof(string), typeof(BindablePasswordBox),
+           new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, MockBlocked, NameFriendsValueCallback, false, UpdateSourceTrigger.PropertyChanged), NameFriendsCallback);
+        private bool _isChanging;
+
+        private static object NameFriendsValueCallback(DependencyObject d, object baseValue)
+        {
+            if (baseValue is string)
+            {
+                string password = baseValue as string;
+
+
+                return password.Trim();
+
+            }
+            return "";
+        }
+
+        private static void MockBlocked(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is CustomModalDialog dialog)
+            {
+                dialog.UpdateText();
+            }
+        }
+        public string Text
+        {
+            get { return (string)GetValue(nameOfFriend); }
+            set { SetValue(nameOfFriend, value); }
+        }
+        private static bool NameFriendsCallback(object value)
+        {
+
+
+            if (value is string)
+            {
+                value = (value as string).Trim();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        private void UpdateText()
+        {
+
+            Content.Text = Text;
+            
+        }
+
+     
         public CustomModalDialog()
         {
             InitializeComponent();
@@ -27,6 +79,16 @@ namespace ClientChat_WPF_MVVM.View.CustomControls
         private void Rectangle_MouseDown(object sender, MouseEventArgs e)
         {
             this.Visibility= Visibility.Collapsed;
+        }
+
+ 
+     
+
+        private void Content_TextChanged(object sender, TextChangedEventArgs e)
+        {
+   _isChanging = true;
+            Text = Content.Text;
+            _isChanging = false;
         }
     }
 }

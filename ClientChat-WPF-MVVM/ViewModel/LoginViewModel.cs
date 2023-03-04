@@ -31,10 +31,10 @@ public class LoginViewModel : ViewModelBase, INotifyDataErrorInfo
         set
         {
             _email = value;
-            if (_password.Length < 4)
-            {
-                AddError(nameof(Email), "more bykav for email");
-            }
+            //if (_password.Length < 4)
+            //{
+            //    AddError(nameof(Email), "more bykav for email");
+            //}
             OnPropertyChanged("Email");
         }
     }
@@ -44,10 +44,10 @@ public class LoginViewModel : ViewModelBase, INotifyDataErrorInfo
         set
         {
             _password = value;
-            if(_password.Length<4)
-            {
-                AddError(nameof(Password), "more bykav for password");
-            }
+            //if(_password.Length<4)
+            //{
+            //    AddError(nameof(Password), "more bykav for password");
+            //}
             OnPropertyChanged("Password");
         }
     }

@@ -14,9 +14,12 @@ using System.Windows.Shapes;
 
 namespace ClientChat_WPF_MVVM.View
 {
+ 
     /// <summary>
     /// Логика взаимодействия для ChatView.xaml
+    /// 
     /// </summary>
+    /// 
     public partial class ChatView : Window
     {
         public ChatView()
@@ -31,7 +34,10 @@ namespace ClientChat_WPF_MVVM.View
         {
             Application.Current.MainWindow.WindowState = WindowState.Minimized;
         }
-
+        private void Exit_App(object sender, RoutedEventArgs e)
+        {
+           Application.Current.Shutdown();
+        }
         private void WindowStateButton_Click(object sender, RoutedEventArgs e)
         {
             if (Application.Current.MainWindow.WindowState != WindowState.Maximized)
@@ -43,9 +49,6 @@ namespace ClientChat_WPF_MVVM.View
                 Application.Current.MainWindow.WindowState = WindowState.Normal;
             }
         }
-        private void CloseButton_Click(Object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
+      
     }
 }

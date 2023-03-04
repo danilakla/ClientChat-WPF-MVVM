@@ -19,5 +19,15 @@ namespace ClientChat_WPF_MVVM.Services.LoggerService
             countClick++;
             }
         }
+
+        public void EventLogger(string text)
+        {
+
+            using (var stream = new StreamWriter("loggerEvent.txt", true))
+            {
+                stream.WriteLine(text);
+                countClick++;
+            }
+        }
     }
 }

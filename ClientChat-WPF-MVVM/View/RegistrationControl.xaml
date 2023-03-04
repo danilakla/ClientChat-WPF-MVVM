@@ -15,7 +15,7 @@
 
         <Image Source="https://raw.githubusercontent.com/sajjad-z/Login-Page-WPF/master/Images/close.png" Grid.Column="1" Panel.ZIndex="1" MouseUp="Image_MouseUp" Style="{StaticResource imgClose}"/>
 
-        <Border CornerRadius="10 0 0 10">
+        <Border CornerRadius="10 0 0 10" >
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                     <GradientStop Color="Black" Offset="0" />
@@ -56,7 +56,7 @@
             </Grid>
         </Border>
 
-        <Border Background="#FFFFFF" Grid.Column="1" CornerRadius="0 10 10 0" MouseDown="Border_MouseDown">
+        <Border Background="#FFFFFF" Grid.Column="1" CornerRadius="0 10 10 0" >
             <StackPanel VerticalAlignment="Center">
                 <TextBlock Text="{DynamicResource CreateAccText}" Foreground="#FF5F5BFF" Style="{StaticResource TitleText}" />
                 <StackPanel Orientation="Horizontal" Margin="0 20" HorizontalAlignment="Center">
@@ -66,12 +66,14 @@
                     <Button Style="{StaticResource buttonCircle}">
                         <Image Source="https://raw.githubusercontent.com/sajjad-z/Login-Page-WPF/master/Images/facebook.png" Width="20" Height="20" />
                     </Button>
-                    <Button Style="{StaticResource buttonCircle}">
-                        <Image Source="https://raw.githubusercontent.com/sajjad-z/Login-Page-WPF/master/Images/linkedin.png" Width="20" Height="20" />
+                    <Button Style="{StaticResource buttonCircle}" PreviewMouseDown="Image_PreviewMouseDown">
+                        <Image PreviewMouseDown="Image_PreviewMouseDown" 
+                            Source="https://raw.githubusercontent.com/sajjad-z/Login-Page-WPF/master/Images/linkedin.png" Width="20" Height="20" />
                     </Button>
                 </StackPanel>
 
                 <TextBlock Text="{DynamicResource chooseText}" Margin="0 10 0 15" Foreground="#878787" Style="{StaticResource NormalText}" />
+
 
                 <Border BorderBrush="#ACB0AF" BorderThickness="1" Margin="70 7" CornerRadius="5">
                     <Grid Margin="7 9">
@@ -81,26 +83,23 @@
                         </Grid.ColumnDefinitions>
 
                         <Image Source="https://raw.githubusercontent.com/sajjad-z/Login-Page-WPF/master/Images/Email.png" Height="20" />
-                        <TextBlock x:Name="textEmail" MouseDown="textEmail_MouseDown" Text="{DynamicResource emailInput}" Style="{StaticResource textHint}" />
-                        <TextBox Name="txtEmail" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource textBox}" />
+                        <TextBox MouseEnter="txtEmail_MouseEnter" Name="txtEmail" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource textBox}" />
                     </Grid>
                 </Border>
 
-                <Border BorderBrush="#ACB0AF" BorderThickness="1" Margin="70 7" CornerRadius="5">
+                <Border BorderBrush="#ACB0AF" BorderThickness="1" Margin="70 7" CornerRadius="5"  MouseDown="Control_MouseDown">
                     <Grid Margin="7 9">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <Image Source="https://raw.githubusercontent.com/sajjad-z/Login-Page-WPF/master/Images/Lock.png" Height="20" />
-                        <TextBlock x:Name="textPassword"  Text="{DynamicResource passwordInput}" Style="{StaticResource textHint}" />
-                        <TextBox Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"/>
+                        <customconrtols1:BindablePasswordBox Password="{Binding Password}"   MouseDown="Control_MouseDown" Grid.Column="1"/>
+
 
                     </Grid>
                 </Border>
-
-                <Button Content="{DynamicResource SignUpText}" Command="{Binding RegistrationUserAccountCommand}" Style="{StaticResource mainButton}" />
+                <Button  Content="{DynamicResource SignUpText}" Command="{Binding RegistrationUserAccountCommand}" Style="{StaticResource mainButton}" />
             </StackPanel>
         </Border>
 

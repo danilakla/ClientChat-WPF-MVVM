@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClientChat_WPF_MVVM.View"
+                xmlns:local12="clr-namespace:ClientChat_WPF_MVVM.View.CommandView"
+
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors" xmlns:i="clr-namespace:Microsoft.VisualBasic;assembly=Microsoft.VisualBasic.Core"
         xmlns:p="http://schemas.microsoft.com/expression/2010/interactivity"
      xmlns:dv="clr-namespace:ToggleButtonTest;assembly=ToggleButtonTest"
@@ -19,8 +21,9 @@
                 Icon="D:\asp\ClientChat-WPF-MVVM\ClientChat-WPF-MVVM\CustomUI\pagseguro_logo_icon_248258.ico"
 
     >
-
-
+    <Window.CommandBindings>
+        <CommandBinding Command="local12:WindowCommands.Exit" Executed="Exit_App"/>
+    </Window.CommandBindings>
     <Window.Resources>
 
         <ResourceDictionary>
@@ -74,7 +77,9 @@
                             FontWeight="Bold"
                              Click="WindowStateButton_Click"/>
                         <Button Width="20" Height="20" 
-                            Click="CloseButton_Click"
+                                
+                                                   Command="local12:WindowCommands.Exit"
+
                             Content="╳" 
                             Background="Transparent"
                             BorderThickness="0"
@@ -177,20 +182,10 @@
                                     </b:EventTrigger>
                                 </b:Interaction.Triggers>
                             </CustomButton:CustomControl1>
-                            <!--<Button Width="20" Height="20"
-                               Margin="5 0 5 0"
-                               Content="add freined"
-                                Command="{Binding OpenModalDialogCommand}"
-                               />-->
-                            <Image Width="20" Height="20"
-                               RenderOptions.BitmapScalingMode="Fant"
-                               Margin="5 0 5 0"
-                               
-                               Source="./Icons/phone-icon-clip-art--royalty--7.png"/>
-                            <Image Width="20" Height="20"
-                               RenderOptions.BitmapScalingMode="Fant"
-                               Margin="5 0 5 0"
-                               Source="./Icons/digital-camera-black-white-logo-28.png"/>
+
+                            <Button Grid.Column="1" Width="80" Margin="60 0 0 0" Content="New friends"
+                                Command="{Binding OpenModalDialogCommand}" Style="{DynamicResource ButtonStyle}"/>
+
                         </StackPanel>
                     </Grid>
                 </Border>
@@ -239,18 +234,13 @@
                             Grid.Column="2"
                             Margin="0 0 16 0">
                         <Button Width="20" Height="20" 
-                         
                             Content="╳" 
                             Background="Transparent"
                             BorderThickness="0"
                             Foreground="Black"
                             FontWeight="Bold"
                             />
-                        <Image Source="./Icons/1015110-200.png"
-                           Width="20" Height="20"
-                           RenderOptions.BitmapScalingMode="Fant"
-                           Margin="5 5 16 0"
-                           />
+                      
                     </StackPanel>
 
                 </Grid>

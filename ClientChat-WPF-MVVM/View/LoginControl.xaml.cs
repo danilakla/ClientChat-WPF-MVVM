@@ -39,13 +39,6 @@ public partial class LoginControl : UserControl
 
 
 
-    private void txtEmail_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
-    {
-        if (!string.IsNullOrEmpty(txtEmail.Text) && txtEmail.Text.Length > 0)
-            textEmail.Visibility = Visibility.Collapsed;
-        else
-            textEmail.Visibility = Visibility.Visible;
-    }
 
     private void textEmail_MouseDown(object sender, MouseButtonEventArgs e)
     {

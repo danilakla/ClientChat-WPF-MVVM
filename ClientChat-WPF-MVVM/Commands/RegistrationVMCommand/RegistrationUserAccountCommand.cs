@@ -40,7 +40,7 @@ public class RegistrationUserAccountCommand<TView, TViewModel> : CommandAsyncBas
 
         try
         {
-            var userDto = new UserAuthDto { Email = _registrationViewModel.Email, Password = _registrationViewModel.Password };
+            var userDto = new UserAuthDto { Email = _registrationViewModel.Email, Password = _registrationViewModel?.Password?.ToString() };
 
             var tokens = new UserAuthInfoModel
             {
