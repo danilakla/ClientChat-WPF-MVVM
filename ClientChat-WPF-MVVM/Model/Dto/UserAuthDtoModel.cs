@@ -8,6 +8,6 @@ namespace ClientChat_WPF_MVVM.Model;
 public class UserAuthDto
 {
     public string Password { get; set; } = string.Empty;
-    public string Email { get; set; } = string.Empty;
+    public string Username { get; set; } = string.Empty;
 
 }

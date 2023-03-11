@@ -1,4 +1,5 @@
 ﻿using ClientChat_WPF_MVVM.Model;
+using ClientChat_WPF_MVVM.Model.AuthModels;
 using ClientChat_WPF_MVVM.Services;
 using ClientChat_WPF_MVVM.Services.API.Authentication;
 using ClientChat_WPF_MVVM.Services.TokentServices;
@@ -12,14 +13,14 @@ public class RegistrationUserAccountCommand<TView, TViewModel> : CommandAsyncBas
 {
     private readonly NavigationWindowService<TView> _navigationWindowService;
     private readonly NavigationService<TViewModel> _navigationService;
-    private readonly AuthUserService<UserAuthInfoModel> _authUserService;
+    private readonly AuthUserService<ResponseAuthServerUserData> _authUserService;
     private readonly RegistrationViewModel _registrationViewModel;
     private readonly TokenServieces _tokenServieces;
     private readonly UserStoreServices _userStoreServices;
 
     public RegistrationUserAccountCommand(NavigationWindowService<TView> navigationWindowService,
                                            NavigationService<TViewModel> navigationService,
-                                           AuthUserService<UserAuthInfoModel> authUserService,
+                                           AuthUserService<ResponseAuthServerUserData> authUserService,
                                            RegistrationViewModel registrationViewModel,
                                            TokenServieces tokenServieces,
                                            UserStoreServices userStoreServices
@@ -40,22 +41,23 @@ public class RegistrationUserAccountCommand<TView, TViewModel> : CommandAsyncBas
 
         try
         {
-            var userDto = new UserAuthDto { Email = _registrationViewModel.Email, Password = _registrationViewModel?.Password?.ToString() };
+            var userDto = new UserAuthDto { Username = _registrationViewModel.Email, Password = _registrationViewModel?.Password?.ToString() };
+
+            var data=await _authUserService.CreateAccount(userDto);
 
             var tokens = new UserAuthInfoModel
             {
                 AccToken = new AccessToken
                 {
-                    AccToken = "SOME TEXTX"
+                    AccToken = data.token
                 },
                 RefToken = new RefreshToken
                 {
-                    RefToken = "REFS REXC"
+                        RefToken = data.token
                 }
 
             };
-            //await _authUserService.CreateAccount(userDto);
-            _userStoreServices.CreateProfileLocaly( userDto );
+            _userStoreServices.CreateProfileLocaly( new UserAuthDto { Username=data.user} );
             _tokenServieces.SetTokenAllToken(tokens.AccToken, tokens.RefToken);
             _navigationService.Navigate();
             _navigationWindowService.Navigate();

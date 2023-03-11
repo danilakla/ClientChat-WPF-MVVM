@@ -24,35 +24,20 @@ public class AuthUserService<T>
 
     public async Task<T> CreateAccount(UserAuthDto userAuthDto)
     {
-        return await SendData(userAuthDto, "Auth/registration/");
+        return await SendData(userAuthDto, "https://localhost:7293/api/Authenticate/register");
 
 
     }
-    public async Task Test()
-    {
-        using (var connection = _httpConnection.CreateHttpContext())
-        {
 
-            HttpResponseMessage response =
-                await connection.GetAsync($"https://localhost:7097/weatherForecast");
-
-            response.EnsureSuccessStatusCode();
-
-            // deserialize to a list 
-            string ls =
-                await response.Content.ReadAsStringAsync();
-            var res = JsonConvert.DeserializeObject<T>(ls);
-        }
-
-    }
     private async Task<T> SendData(UserAuthDto userAuthDto, string uri)
     {
         try
         {
             using (var connection = _httpConnection.CreateHttpContext())
             {
+                
                 HttpResponseMessage response =
-                     await connection.PostAsJsonAsync($"{_httpConnection.ServerUrl}{uri}", userAuthDto);
+                     await connection.PostAsJsonAsync(uri, userAuthDto);
                 response.EnsureSuccessStatusCode();
                 string userInfo =
                    await response.Content.ReadAsStringAsync();
@@ -72,7 +57,7 @@ public class AuthUserService<T>
 
     public async Task<T> LoginAccount(UserAuthDto userAuthDto)
     {
-        return await SendData(userAuthDto, "Auth/login/");
+        return await SendData(userAuthDto, "https://localhost:7293/api/Authenticate/login");
 
     }
 }

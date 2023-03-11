@@ -16,6 +16,8 @@ public class UserProfileModel:INotifyPropertyChanged
 
     private string _name;
 
+    public string Token { get; set; }
+
     public string Name
     {
         get { return _name; }

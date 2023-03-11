@@ -2,6 +2,7 @@
 using ClientChat_WPF_MVVM.HostBuilders;
 using ClientChat_WPF_MVVM.HttpClintContext;
 using ClientChat_WPF_MVVM.Model;
+using ClientChat_WPF_MVVM.Model.AuthModels;
 using ClientChat_WPF_MVVM.Services;
 using ClientChat_WPF_MVVM.Services.API.Authentication;
 using ClientChat_WPF_MVVM.Services.JsonSerialization;
@@ -51,7 +52,7 @@ public partial class App : Application
                 services.AddSingleton<Logger>();
                 services.AddSingleton<UndoRedoStoreStringSearch>();
 
-                services.AddSingleton<AuthUserService<UserAuthInfoModel>>();
+                services.AddSingleton<AuthUserService<ResponseAuthServerUserData>>();
                 services.AddSingleton(new HttpConnection(hostContext.Configuration.GetValue<string>("ServerUrl")));
 
 

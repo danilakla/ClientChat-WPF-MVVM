@@ -9,7 +9,9 @@ using System.Windows;
 namespace ClientChat_WPF_MVVM.View.CommandView;
 public class WindowCommands
 {
+
     static WindowCommands()
+       
     {
         Exit = new RoutedCommand("Exit", typeof(Window));
     }

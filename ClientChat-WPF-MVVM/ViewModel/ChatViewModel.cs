@@ -2,20 +2,27 @@ using ClientChat_WPF_MVVM.Commands;
 using ClientChat_WPF_MVVM.Commands.ChatCommand;
 using ClientChat_WPF_MVVM.Commands.UndoRedoCommand;
 using ClientChat_WPF_MVVM.Commands.UtilCommand;
+using ClientChat_WPF_MVVM.HttpClintContext;
 using ClientChat_WPF_MVVM.Model;
 using ClientChat_WPF_MVVM.Model.ChatModels;
 using ClientChat_WPF_MVVM.Services;
 using ClientChat_WPF_MVVM.Services.API.Authentication;
+using ClientChat_WPF_MVVM.Services.API.ChatHub;
+using ClientChat_WPF_MVVM.Services.JsonSerialization;
 using ClientChat_WPF_MVVM.Services.LoggerService;
+using ClientChat_WPF_MVVM.Services.TokentServices;
 using ClientChat_WPF_MVVM.Strore;
 using ClientChat_WPF_MVVM.View;
 using ClientChat_WPF_MVVM.ViewModel;
+using Microsoft.AspNetCore.SignalR.Client;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 public class ChatViewModel : ViewModelBase
 {
@@ -235,6 +242,8 @@ public class ChatViewModel : ViewModelBase
 
 
     public ICommand LoadDataCommand { get; }
+    public ICommand GetMessage { get; }
+
     public ICommand OpenModalDialogCommand { get; }
     public ICommand AddFriendCommand { get; }
     public ICommand UpDataUserDataCommand { get; }
@@ -251,24 +260,47 @@ public class ChatViewModel : ViewModelBase
         NavigationWindowService<ChatView> navigationWindowService,
         Logger logger,
         UndoRedoStoreStringSearch undoRedoStringSearch ,
-        ChatView chatView)
+        ChatView chatView, TokenServieces tokenServieces)
     {
 
-        MessagesForSelectedConversation = new();
-        Test = "test cje";
+        
+        MessagesForSelectedConversation = new();    
+        var dd = tokenServieces.GetToken();
+        ConnectionToChat.Connection = new HubConnectionBuilder()
+        .WithUrl("https://localhost:7161/chathub", option =>
+        {
+            option.AccessTokenProvider = () => Task.FromResult(tokenServieces.GetToken().AccToken);
+
+        })
+        .WithAutomaticReconnect()
+        .Build();
+
+
+
+
         ChangeUserCommand = new ChangeUserCommand(this);
-        SendCommand = new SendMessageCommand(this);
+        SendCommand = new SendMessageCommand(this,chatView);
         UpDataUserDataCommand = new UpDataUserDataCommand(this);
         DeleteUserCommand = new DeleteUserCommand(this);
         OpenModalDialogCommand = new OpenModalDialogCommand(navigationWindowService);
         AddFriendCommand = new AddFriendCommand(this);
         LoadDataCommand = new LoadedCommand(this, userStoreServices);
+        GetMessage=new GetMessageCommand(this,chatView);
         CommandToBindTo = new LoggerCommand(logger, chatView,this);
         UndoCommand = new UndoCommand(this, undoRedoStringSearch);
         RedoCommand = new RedoCommand(this, undoRedoStringSearch);
 
+        GetMessage.Execute(null);
+
         LoadDataCommand.Execute(null);
+        
         FindFriend = "";
 
+
+
+
     }
+
+
+
 }

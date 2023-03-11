@@ -20,7 +20,7 @@ public class UserStoreServices
         _userStore.User.Id =0 ;
 
 
-        _userStore.User.Email = user.Email;
+        _userStore.User.Email = user.Username;
     }
 
     public UserProfileModel GetUserProfile()

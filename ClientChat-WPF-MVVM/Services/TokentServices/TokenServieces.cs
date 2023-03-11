@@ -32,9 +32,9 @@ public class TokenServieces
     {
         _serializationToken.Serialize(token,path);
     }
-    public T GetToken<T>(string key)
+    public AccessToken GetToken()
     {
-        return _configuration.GetValue<T>(key);
+        return _serializationToken.Deserialize<AccessToken>("d", _configuration.GetValue<string>("pathToAccTokenJson"));
     }
 
 

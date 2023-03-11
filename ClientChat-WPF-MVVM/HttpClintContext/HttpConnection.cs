@@ -9,6 +9,7 @@ namespace ClientChat_WPF_MVVM.HttpClintContext;
 public class HttpConnection
 {
     public string ServerUrl { get; set; }
+
     public HttpConnection(string url)
     {
         ServerUrl = url;

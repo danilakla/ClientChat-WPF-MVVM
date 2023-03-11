@@ -1,5 +1,6 @@
 ﻿using ClientChat_WPF_MVVM.Commands;
 using ClientChat_WPF_MVVM.Model;
+using ClientChat_WPF_MVVM.Model.AuthModels;
 using ClientChat_WPF_MVVM.Services;
 using ClientChat_WPF_MVVM.Services.API.Authentication;
 using ClientChat_WPF_MVVM.Services.TokentServices;
@@ -47,7 +48,7 @@ public class RegistrationViewModel:ViewModelBase
     public RegistrationViewModel(NavigationService<LoginViewModel> navigateSerivceRegViewModel, 
         NavigationWindowService<ChatView> navigationWindowCommand, 
         NavigationService<ChatViewModel> navigateSerivceChatViewModel, 
-        AuthUserService<UserAuthInfoModel> authUserService,
+        AuthUserService<ResponseAuthServerUserData> authUserService,
         TokenServieces tokenSerivece, 
         UserStoreServices userStoreServices)
     {

@@ -1,4 +1,5 @@
 ﻿using ClientChat_WPF_MVVM.Model;
+using ClientChat_WPF_MVVM.Model.AuthModels;
 using ClientChat_WPF_MVVM.Services;
 using ClientChat_WPF_MVVM.Services.API.Authentication;
 using ClientChat_WPF_MVVM.Services.TokentServices;
@@ -14,14 +15,14 @@ public class LoginUserAccountCommand<TView, TViewModel> : CommandAsyncBase where
 {
     private readonly NavigationWindowService<TView> _navigationWindowService;
     private readonly NavigationService<TViewModel> _navigationService;
-    private readonly AuthUserService<UserAuthInfoModel> _authUserService;
+    private readonly AuthUserService<ResponseAuthServerUserData> _authUserService;
     private readonly LoginViewModel _loginViewModel;
     private readonly TokenServieces _tokenServieces;
     private readonly UserStoreServices _userStoreServices;
 
     public LoginUserAccountCommand(NavigationWindowService<TView> navigationWindowService, 
                                            NavigationService<TViewModel> navigationService,
-                                           AuthUserService<UserAuthInfoModel> authUserService,
+                                           AuthUserService<ResponseAuthServerUserData> authUserService,
                                            LoginViewModel loginViewModel,
                                            TokenServieces tokenServieces,
                                            UserStoreServices userStoreServices
@@ -41,27 +42,29 @@ public class LoginUserAccountCommand<TView, TViewModel> : CommandAsyncBase where
 
         try
         {
-        var userDto = new UserAuthDto { Email = _loginViewModel.Email, Password = _loginViewModel.Password };
+        var userDto = new UserAuthDto { Username = _loginViewModel.Email, Password = _loginViewModel.Password };
+           var data= await _authUserService.LoginAccount(userDto);
 
-        var tokens = new UserAuthInfoModel
-        {
-            AccToken = new AccessToken
+
+            var tokens = new UserAuthInfoModel
             {
-                AccToken = "SOME  login TEXTX"
+                AccToken = new AccessToken
+                {
+                    AccToken = data.token,
             },
             RefToken= new RefreshToken
             {
-                RefToken="REFS REXC login"
+                RefToken=data.token,
             }
 
         };
-     // await _authUserService.LoginAccount(userDto);
         _tokenServieces.SetTokenAllToken(tokens.AccToken, tokens.RefToken);
         _userStoreServices.CreateProfileLocaly(userDto);
         _navigationService.Navigate();
         _navigationWindowService.Navigate();
 
-        }catch(Exception e)
+        }
+        catch (Exception e)
         {
             Console.WriteLine(e.Message);
         }

@@ -1,10 +1,12 @@
 ﻿using ClientChat_WPF_MVVM.Strore;
+using Microsoft.AspNetCore.SignalR.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace ClientChat_WPF_MVVM.ViewModel;
 public class MainViewModel : ViewModelBase
@@ -14,9 +16,11 @@ public class MainViewModel : ViewModelBase
 
     public ViewModelBase CurrentViewModel => _navigationStore.CurrentViewModel;
     public Window CurrentWinodw => _navigationWindowStore.CurrentWindow;
-
+    HubConnection Connection;
     public MainViewModel(NavigationStore navigationStore, NavigationWindowStore navigationWindowStore)
     {
+    
+
         _navigationWindowStore = navigationWindowStore;
         _navigationStore = navigationStore;
 

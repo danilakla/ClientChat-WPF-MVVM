@@ -1,4 +1,5 @@
 ﻿using ClientChat_WPF_MVVM.Model;
+using ClientChat_WPF_MVVM.Model.AuthModels;
 using ClientChat_WPF_MVVM.Services;
 using ClientChat_WPF_MVVM.Services.API.Authentication;
 using ClientChat_WPF_MVVM.Services.TokentServices;
@@ -58,7 +59,7 @@ public class LoginViewModel : ViewModelBase, INotifyDataErrorInfo
     public LoginViewModel(NavigationService<RegistrationViewModel> navigateSerivceLonginViewModel, 
         NavigationWindowService<ChatView> navigationWindowCommand, 
         NavigationService<ChatViewModel> navigateSerivceChatViewModel,
-         AuthUserService<UserAuthInfoModel> authUserService,
+         AuthUserService<ResponseAuthServerUserData> authUserService,
         TokenServieces tokenSerivece,
         UserStoreServices userStoreServices)
     {

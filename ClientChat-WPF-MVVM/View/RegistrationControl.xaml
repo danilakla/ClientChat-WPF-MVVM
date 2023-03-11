@@ -96,7 +96,6 @@
 
                         <customconrtols1:BindablePasswordBox Password="{Binding Password}" Grid.Column="1"/>
 
-                        <!--<Button  Style="{StaticResource mainButton}" Content="312"  MouseDown="Control_MouseDown"/>-->
 
                     </Grid>
                 </Border>
