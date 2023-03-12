@@ -3,6 +3,7 @@ using ClientChat_WPF_MVVM.Model;
 using ClientChat_WPF_MVVM.Model.AuthModels;
 using ClientChat_WPF_MVVM.Services;
 using ClientChat_WPF_MVVM.Services.API.Authentication;
+using ClientChat_WPF_MVVM.Services.API.ProfileServices;
 using ClientChat_WPF_MVVM.Services.TokentServices;
 using ClientChat_WPF_MVVM.View;
 using System;
@@ -50,10 +51,11 @@ public class RegistrationViewModel:ViewModelBase
         NavigationService<ChatViewModel> navigateSerivceChatViewModel, 
         AuthUserService<ResponseAuthServerUserData> authUserService,
         TokenServieces tokenSerivece, 
-        UserStoreServices userStoreServices)
+        UserStoreServices userStoreServices,
+        ProfileSeriveces<ProfileDto> profileSeriveces)
     {
         NavigateToLoginCommand = new NavigateCommand<LoginViewModel>(navigateSerivceRegViewModel);
-        RegistrationUserAccountCommand = new RegistrationUserAccountCommand<ChatView,ChatViewModel>(navigationWindowCommand, navigateSerivceChatViewModel, authUserService, this,tokenSerivece, userStoreServices);
+        RegistrationUserAccountCommand = new RegistrationUserAccountCommand<ChatView,ChatViewModel>(profileSeriveces,navigationWindowCommand, navigateSerivceChatViewModel, authUserService, this,tokenSerivece, userStoreServices);
         TestCommand11 = new DebugCommand();
     }
 

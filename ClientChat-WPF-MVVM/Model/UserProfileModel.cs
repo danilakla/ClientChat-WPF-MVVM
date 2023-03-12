@@ -11,12 +11,12 @@ public class UserProfileModel:INotifyPropertyChanged
 
 {
     public int Id { get; set; }
-    public string Lastname { get; set; }
+    public string Lastname { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
 
-    private string _name;
+    private string _name=string.Empty;
 
-    public string Token { get; set; }
+    public string Token { get; set; }= string.Empty;
 
     public string Name
     {
@@ -29,7 +29,7 @@ public class UserProfileModel:INotifyPropertyChanged
     }
 
 
-    private string _primag;
+    private string _primag=string.Empty;
 
     public string profileImage
     {

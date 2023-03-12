@@ -5,6 +5,8 @@ using ClientChat_WPF_MVVM.Model;
 using ClientChat_WPF_MVVM.Model.AuthModels;
 using ClientChat_WPF_MVVM.Services;
 using ClientChat_WPF_MVVM.Services.API.Authentication;
+using ClientChat_WPF_MVVM.Services.API.ChatSerivices;
+using ClientChat_WPF_MVVM.Services.API.ProfileServices;
 using ClientChat_WPF_MVVM.Services.JsonSerialization;
 using ClientChat_WPF_MVVM.Services.LoggerService;
 using ClientChat_WPF_MVVM.Services.Serialization;
@@ -50,10 +52,13 @@ public partial class App : Application
                 services.AddSingleton<ISerialization,SerializationServices>();
                 services.AddSingleton<TokenServieces>();
                 services.AddSingleton<Logger>();
+                services.AddSingleton<ProfileSeriveces<ProfileDto>>();
+
                 services.AddSingleton<UndoRedoStoreStringSearch>();
 
                 services.AddSingleton<AuthUserService<ResponseAuthServerUserData>>();
                 services.AddSingleton(new HttpConnection(hostContext.Configuration.GetValue<string>("ServerUrl")));
+                services.AddSingleton<ChatServices>();
 
 
                 services.AddSingleton<NavigationWindowStore>();

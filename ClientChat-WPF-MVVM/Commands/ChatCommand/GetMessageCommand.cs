@@ -17,7 +17,7 @@ namespace ClientChat_WPF_MVVM.Commands.ChatCommand
         private readonly ChatViewModel _chatViewModel;
         private readonly ChatView _chatView;
 
-        public GetMessageCommand(ChatViewModel  chatViewModel, ChatView chatView)
+        public GetMessageCommand(ChatViewModel chatViewModel, ChatView chatView)
         {
             _chatViewModel = chatViewModel;
             _chatView = chatView;
@@ -45,8 +45,25 @@ namespace ClientChat_WPF_MVVM.Commands.ChatCommand
                         ms.IsOwned = false;
                     }
 
-                   var friendProfile= _chatViewModel.Conversations.FirstOrDefault(e => e.FriendProfile.Email == user);
-                    _chatViewModel.MessagesForSelectedConversation.Add(ms);
+
+                    if (user == _chatViewModel.User.Email)
+                    {
+                        var friendProfile = _chatViewModel.Conversations.FirstOrDefault(e => e.FriendProfile.Email == _chatViewModel.SelectedConversation.FriendProfile.Email);
+                        friendProfile.MessageModels.Add(ms);
+                        _chatViewModel.MessagesForSelectedConversation.Add(ms);
+
+                    }
+                    else
+                    {
+                        var friendProfile = _chatViewModel.Conversations.FirstOrDefault(e => e.FriendProfile.Email == user);
+                        friendProfile.MessageModels.Add(ms);
+                        if (user == _chatViewModel.SelectedConversation.FriendProfile.Email)
+                        {
+                            _chatViewModel.MessagesForSelectedConversation.Add(ms);
+
+                        }
+                    }
+                    
                 });
 
             });

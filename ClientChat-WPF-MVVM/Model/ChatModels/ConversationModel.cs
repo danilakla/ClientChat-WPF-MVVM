@@ -11,6 +11,6 @@ namespace ClientChat_WPF_MVVM.Model.ChatModels
     {
         public int Id { get; set; }
         public UserProfileModel FriendProfile { get; set; }
-        public List<MessageModel> MessageModels { get; set; }
+        public List<MessageModel> MessageModels { get; set; } = new();
     }
 }

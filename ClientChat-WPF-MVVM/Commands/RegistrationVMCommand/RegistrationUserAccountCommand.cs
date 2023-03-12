@@ -2,6 +2,7 @@
 using ClientChat_WPF_MVVM.Model.AuthModels;
 using ClientChat_WPF_MVVM.Services;
 using ClientChat_WPF_MVVM.Services.API.Authentication;
+using ClientChat_WPF_MVVM.Services.API.ProfileServices;
 using ClientChat_WPF_MVVM.Services.TokentServices;
 using ClientChat_WPF_MVVM.ViewModel;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ using System.Windows;
 public class RegistrationUserAccountCommand<TView, TViewModel> : CommandAsyncBase where TView : Window
                                                            where TViewModel : ViewModelBase
 {
+    private readonly ProfileSeriveces<ProfileDto> _profileSeriveces;
     private readonly NavigationWindowService<TView> _navigationWindowService;
     private readonly NavigationService<TViewModel> _navigationService;
     private readonly AuthUserService<ResponseAuthServerUserData> _authUserService;
@@ -18,7 +20,7 @@ public class RegistrationUserAccountCommand<TView, TViewModel> : CommandAsyncBas
     private readonly TokenServieces _tokenServieces;
     private readonly UserStoreServices _userStoreServices;
 
-    public RegistrationUserAccountCommand(NavigationWindowService<TView> navigationWindowService,
+    public RegistrationUserAccountCommand(ProfileSeriveces<ProfileDto> profileSeriveces, NavigationWindowService<TView> navigationWindowService,
                                            NavigationService<TViewModel> navigationService,
                                            AuthUserService<ResponseAuthServerUserData> authUserService,
                                            RegistrationViewModel registrationViewModel,
@@ -27,7 +29,7 @@ public class RegistrationUserAccountCommand<TView, TViewModel> : CommandAsyncBas
 
                                            )
     {
-
+        _profileSeriveces = profileSeriveces;
         _navigationWindowService = navigationWindowService;
         _navigationService = navigationService;
         _authUserService = authUserService;
@@ -59,6 +61,7 @@ public class RegistrationUserAccountCommand<TView, TViewModel> : CommandAsyncBas
             };
             _userStoreServices.CreateProfileLocaly( new UserAuthDto { Username=data.user} );
             _tokenServieces.SetTokenAllToken(tokens.AccToken, tokens.RefToken);
+            _profileSeriveces.CreateProfile(new ProfileDto { EmailOfFriend = userDto.Username});
             _navigationService.Navigate();
             _navigationWindowService.Navigate();
         }

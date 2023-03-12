@@ -2,6 +2,8 @@
 using ClientChat_WPF_MVVM.Model.ChatModels;
 using ClientChat_WPF_MVVM.Services;
 using ClientChat_WPF_MVVM.Services.API.Authentication;
+using ClientChat_WPF_MVVM.Services.API.ChatSerivices;
+using ClientChat_WPF_MVVM.Services.API.ProfileServices;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,51 +16,33 @@ public class LoadedCommand : CommandAsyncBase
 {
     private readonly ChatViewModel _chatViewModel;
     private readonly UserStoreServices _userStoreServices;
+    private readonly ChatServices _chatServices;
 
-    public LoadedCommand(ChatViewModel chatViewModel, UserStoreServices userStoreServices)
+    public LoadedCommand(ChatViewModel chatViewModel, UserStoreServices userStoreServices, ChatServices chatServices)
     {
         _chatViewModel = chatViewModel;
         _userStoreServices = userStoreServices;
+        _chatServices = chatServices;
     }
 
     public async override Task ExecuteAsync(object parameter)
     {
-        
+
         var user = _userStoreServices.GetUserProfile();
         user.profileImage = "https://i.imgur.com/UcFmWTI.jpeg";
         _chatViewModel.User = user;
-        _chatViewModel.Conversations = new ObservableCollection<ConversationModel>()
+        var friends = await _chatServices.LoadFriends(_chatViewModel);
+        ObservableCollection<ConversationModel> listOfFriend = new();
+
+        if (friends is not null)
         {
-            new ConversationModel()
+            foreach (var friend in friends)
             {
-                Id=0,
-                FriendProfile=new UserProfileModel
-                {
-                    Id=1,
-                    profileImage="https://i.imgur.com/ABwifID.gif",
-                    Email="first email",
-                    Name="first name"
-                }
-            },
-            new ConversationModel()
-            {
-                Id=1,
-                FriendProfile=new UserProfileModel
-                {
-                    Id=2,
-                                        profileImage="https://i.imgur.com/cdHnutz.jpeg",
-
-                    Email="second email",
-                    Name="second name"
-                }
-            },
-
-        };
+                _chatViewModel.Conversations.Add(new ConversationModel { Id = 0, FriendProfile = new UserProfileModel { Id = 0, profileImage = "", Email = friend.EmailOfFriend, Name = friend.EmailOfFriend } });
+            }
+        }
 
 
     }
-    private async Task cd()
-    {
-        while(true) { }
-    }
+
 }

@@ -8,6 +8,8 @@ using ClientChat_WPF_MVVM.Model.ChatModels;
 using ClientChat_WPF_MVVM.Services;
 using ClientChat_WPF_MVVM.Services.API.Authentication;
 using ClientChat_WPF_MVVM.Services.API.ChatHub;
+using ClientChat_WPF_MVVM.Services.API.ChatSerivices;
+using ClientChat_WPF_MVVM.Services.API.ProfileServices;
 using ClientChat_WPF_MVVM.Services.JsonSerialization;
 using ClientChat_WPF_MVVM.Services.LoggerService;
 using ClientChat_WPF_MVVM.Services.TokentServices;
@@ -121,19 +123,29 @@ public class ChatViewModel : ViewModelBase
         if (fr == "")
         {
             FindConversations.Clear();
+            if(Conversations is not null) { 
             foreach (var item in Conversations)
             {
                 FindConversations.Add(item);
             }
+            }
         }
         else
         {
-            var newList = Conversations.Where(e => e.FriendProfile.Name.Contains(fr)).ToList();
+            try
+            {
+  var newList = Conversations.Where(e => e.FriendProfile.Name.Contains(fr)).ToList();
             FindConversations.Clear();
             foreach (var item in newList)
             {
                 FindConversations.Add(item);
             }
+            }
+            catch (System.Exception)
+            {
+
+            }
+          
         }
 
 
@@ -206,6 +218,7 @@ public class ChatViewModel : ViewModelBase
             IsView = true;
             ChangeUser = false;
             _selectedConversation = value;
+            SelectConversationCommand.Execute(null);
             OnPropertyChanged(nameof(SelectedConversation));
         }
     }
@@ -255,12 +268,18 @@ public class ChatViewModel : ViewModelBase
 
 
     public ICommand ChangeUserCommand { get; }
+    public ICommand SelectConversationCommand { get; }
+    
 
     public ChatViewModel(UserStoreServices userStoreServices,
         NavigationWindowService<ChatView> navigationWindowService,
         Logger logger,
         UndoRedoStoreStringSearch undoRedoStringSearch ,
-        ChatView chatView, TokenServieces tokenServieces)
+        ChatView chatView, 
+        TokenServieces tokenServieces,
+        HttpConnection httpConnection,
+        ChatServices chatServices
+        )
     {
 
         
@@ -283,13 +302,14 @@ public class ChatViewModel : ViewModelBase
         UpDataUserDataCommand = new UpDataUserDataCommand(this);
         DeleteUserCommand = new DeleteUserCommand(this);
         OpenModalDialogCommand = new OpenModalDialogCommand(navigationWindowService);
-        AddFriendCommand = new AddFriendCommand(this);
-        LoadDataCommand = new LoadedCommand(this, userStoreServices);
+        AddFriendCommand = new AddFriendCommand(this, httpConnection);
+        LoadDataCommand = new LoadedCommand(this, userStoreServices,chatServices);
         GetMessage=new GetMessageCommand(this,chatView);
         CommandToBindTo = new LoggerCommand(logger, chatView,this);
         UndoCommand = new UndoCommand(this, undoRedoStringSearch);
         RedoCommand = new RedoCommand(this, undoRedoStringSearch);
-
+        SelectConversationCommand=new SelectConversationCommand(this, chatServices);
+        Conversations = new();
         GetMessage.Execute(null);
 
         LoadDataCommand.Execute(null);

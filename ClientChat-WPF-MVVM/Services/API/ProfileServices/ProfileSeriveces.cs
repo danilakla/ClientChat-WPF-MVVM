@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace ClientChat_WPF_MVVM.Services.API.ProfileServices
 {
-    class ProfileSeriveces<T>
+ public   class ProfileSeriveces<T>
     {
         private readonly HttpConnection _httpConnection;
 
@@ -27,7 +27,7 @@ namespace ClientChat_WPF_MVVM.Services.API.ProfileServices
                 using (var connection = _httpConnection.CreateHttpContext())
                 {
                     HttpResponseMessage response =
-                         await connection.PostAsJsonAsync($"d", profile);
+                         await connection.PostAsJsonAsync($"https://localhost:7161/api/ChatContorller/createProfile", profile);
                     response.EnsureSuccessStatusCode();
                 }
             }
