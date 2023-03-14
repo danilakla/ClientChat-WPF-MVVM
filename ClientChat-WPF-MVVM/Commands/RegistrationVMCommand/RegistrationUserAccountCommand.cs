@@ -61,7 +61,7 @@ public class RegistrationUserAccountCommand<TView, TViewModel> : CommandAsyncBas
             };
             _userStoreServices.CreateProfileLocaly( new UserAuthDto { Username=data.user} );
             _tokenServieces.SetTokenAllToken(tokens.AccToken, tokens.RefToken);
-            _profileSeriveces.CreateProfile(new ProfileDto { EmailOfFriend = userDto.Username});
+            _profileSeriveces.CreateProfile(new ProfileDto { Name = userDto.Username});
             _navigationService.Navigate();
             _navigationWindowService.Navigate();
         }

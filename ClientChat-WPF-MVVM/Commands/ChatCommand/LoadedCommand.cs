@@ -38,7 +38,7 @@ public class LoadedCommand : CommandAsyncBase
         {
             foreach (var friend in friends)
             {
-                _chatViewModel.Conversations.Add(new ConversationModel { Id = 0, FriendProfile = new UserProfileModel { Id = 0, profileImage = "", Email = friend.EmailOfFriend, Name = friend.EmailOfFriend } });
+                _chatViewModel.Conversations.Add(new ConversationModel { Id = 0, FriendProfile = new UserProfileModel { Id = 0, profileImage = "", Email = friend.Name, Name = friend.Name } });
             }
         }
 

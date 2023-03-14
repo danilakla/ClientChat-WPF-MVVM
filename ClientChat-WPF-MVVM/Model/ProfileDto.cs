@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 namespace ClientChat_WPF_MVVM.Model;
 public class ProfileDto
 {
-    public string EmailOfFriend { get; set; }
+    public string Name { get; set; }
 }
