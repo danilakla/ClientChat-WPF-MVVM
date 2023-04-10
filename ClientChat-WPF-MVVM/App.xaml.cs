@@ -1,18 +1,8 @@
-﻿using ClientChat_WPF_MVVM.Commands;
-using ClientChat_WPF_MVVM.HostBuilders;
+﻿using ClientChat_WPF_MVVM.HostBuilders;
 using ClientChat_WPF_MVVM.HttpClintContext;
-using ClientChat_WPF_MVVM.Model;
-using ClientChat_WPF_MVVM.Model.AuthModels;
-using ClientChat_WPF_MVVM.Services;
-using ClientChat_WPF_MVVM.Services.API.Authentication;
-using ClientChat_WPF_MVVM.Services.API.ChatSerivices;
-using ClientChat_WPF_MVVM.Services.API.ProfileServices;
-using ClientChat_WPF_MVVM.Services.JsonSerialization;
-using ClientChat_WPF_MVVM.Services.LoggerService;
-using ClientChat_WPF_MVVM.Services.Serialization;
-using ClientChat_WPF_MVVM.Services.TokentServices;
-using ClientChat_WPF_MVVM.Strore;
+
 using ClientChat_WPF_MVVM.View;
+using ClientChat_WPF_MVVM.View.UserControllers.Preview;
 using ClientChat_WPF_MVVM.ViewModel;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -42,32 +32,20 @@ public partial class App : Application
             {
 
 
-                    
-                services.AddSingleton<NavigationStore>();
-                services.AddSingleton<UserStore>();
-                
-                services.AddSingleton<UserProfileModel>();
-                services.AddSingleton<UserStoreServices>();
+             
 
-                services.AddSingleton<ISerialization,SerializationServices>();
-                services.AddSingleton<TokenServieces>();
-                services.AddSingleton<Logger>();
-                services.AddSingleton<ProfileSeriveces<ProfileDto>>();
 
-                services.AddSingleton<UndoRedoStoreStringSearch>();
 
-                services.AddSingleton<AuthUserService<ResponseAuthServerUserData>>();
                 services.AddSingleton(new HttpConnection(hostContext.Configuration.GetValue<string>("ServerUrl")));
-                services.AddSingleton<ChatServices>();
-
-
-                services.AddSingleton<NavigationWindowStore>();
+                services.AddSingleton<NavigationPreviewViewModel>();
+                services.AddSingleton<RegistationUniverstityViewModel>();
+                services.AddSingleton<LoginViewModel>();
+                services.AddSingleton<RegistrationViewModel>();
+                services.AddSingleton<PreviewView>();
                 services.AddSingleton<ChatView>();
+                services.AddSingleton<ChatNavigationViewModel>();
 
-                services.AddSingleton(s => new MainWindow()
-                {
-                    DataContext = s.GetRequiredService<MainViewModel>()
-                });
+
             })
             .Build();
 
@@ -79,29 +57,13 @@ public partial class App : Application
 
    
 
-        NavigationService<RegistrationViewModel> navigationService = _host.Services.GetRequiredService<NavigationService<RegistrationViewModel>>();
 
-        navigationService.Navigate();
 
-        MainWindow = _host.Services.GetRequiredService<MainWindow>();
+        MainWindow = _host.Services.GetRequiredService<PreviewView>();
+        MainWindow.DataContext = _host.Services.GetRequiredService<NavigationPreviewViewModel>();
         MainWindow.Show();
-        MainWindow.Cursor = new System.Windows.Input.Cursor(Application.GetResourceStream(new Uri(@"./CustomUI/Circle.cur", UriKind.Relative)).Stream);
-        ResourceDictionary dict = new ResourceDictionary();
-        //switch (Thread.CurrentThread.CurrentCulture.ToString())
-        //{
-        //    case "en-US":
-        //        dict.Source = new Uri("D:\\asp\\ClientChat-WPF-MVVM\\ClientChat-WPF-MVVM\\View\\Resource\\StringResourceEN.xaml");
-        //        break;
-        //    case "ru-RU":
-        //        dict.Source = new Uri("D:\\asp\\ClientChat-WPF-MVVM\\ClientChat-WPF-MVVM\\View\\Resource\\StringResourceRU.xaml");
-        //        break;
-
-        //}
-
-        dict.Source = new Uri("D:\\asp\\ClientChat-WPF-MVVM\\ClientChat-WPF-MVVM\\View\\Resource\\StringResourceEN.xaml");
-
-
-        MainWindow.Resources.MergedDictionaries.Add(dict);
+     
+       
 
         base.OnStartup(e);
     }

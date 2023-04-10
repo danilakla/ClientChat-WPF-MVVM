@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace ClientChat_WPF_MVVM.ViewModel
 {
-    public class RegistrationViewModel:ViewModelBase
+  public  class RegistationUniverstityViewModel:ViewModelBase
     {
-
         private string _lastName;
 
         public string Lastname
@@ -60,22 +59,30 @@ namespace ClientChat_WPF_MVVM.ViewModel
 
             }
         }
+        private string _universityName;
 
-        private string _registrationToken;
-
-        public string RegistrationToken
+        public string UniversityName
         {
-            get { return _registrationToken; }
-            set { _registrationToken = value;
-                OnPropertyChanged("RegistrationToken");
+            get { return _universityName; }
+            set { _universityName = value;
+                OnPropertyChanged("UniversityName");
 
             }
         }
 
-        public RegistrationViewModel()
+        private string _address;
+
+        public string Address
+        {
+            get { return _address; }
+            set { _address = value;
+                OnPropertyChanged("Address");
+            }
+        }
+
+        public RegistationUniverstityViewModel()
         {
 
         }
-
     }
 }

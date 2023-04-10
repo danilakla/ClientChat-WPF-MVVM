@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ClientChat_WPF_MVVM.View
+namespace ClientChat_WPF_MVVM.View.UserControllers.Preview
 {
     /// <summary>
-    /// Логика взаимодействия для ChatView.xaml
+    /// Логика взаимодействия для RegistrationView.xaml
     /// </summary>
-    public partial class ChatView : Window
+    public partial class RegistrationView : UserControl
     {
-        public ChatView()
+        public RegistrationView()
         {
             InitializeComponent();
         }
