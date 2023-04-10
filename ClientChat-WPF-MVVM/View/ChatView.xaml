@@ -5,8 +5,131 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClientChat_WPF_MVVM.View"
         mc:Ignorable="d"
-        Title="ChatView" Height="450" Width="800">
+        Title="ChatView" 
+              Height="800" 
+        Width="1400"
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent">
+
+    <Window.Resources>
+
+        <ResourceDictionary>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="./Styles/ChatStyles.xaml"/>
+
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
-        <TextBlock>test</TextBlock>
+
+        <!--create a new grid-->
+        <Grid Margin="20" Background="#1C2F3E">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition MaxWidth="60"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition MaxHeight="30"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <!--add a shadow effect-->
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="30"
+                                  ShadowDepth="2"
+                                  Direction="-90"
+                                  Color="Gray">
+                </DropShadowEffect>
+            </Grid.Effect>
+
+            <!--add a stack panel to the left of the grid-->
+            <StackPanel Grid.Column="0" 
+                        Grid.Row="0"
+                        
+                       Grid.RowSpan="2"
+                        HorizontalAlignment="Stretch"
+                        Background="#14212B">
+
+                <!--add 3 buttons - Home, Profile and Settings-->
+
+                <Button x:Name="Home"
+                        Height="30"
+                        
+                        
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        Margin="10,60,10,0" Style="{DynamicResource HomeBtnStyle}" Command="{Binding ToProfileView}" >
+
+                    <!--add image-->
+                    <Image Source="../Assets/home_icon.png"
+                           Width="20" Height="20">
+                    </Image>
+
+                </Button>
+
+                <Button x:Name="Profile"
+                        Height="30"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        Margin="10,40,10, 0" Style="{DynamicResource ProfileBtnStyle}" >
+
+                    <!--add image-->
+                    <Image Source="../Assets/profile_icon.png"
+                             Width="20" Height="20">
+                    </Image>
+
+                </Button>
+
+                <Button x:Name="Settings"
+                        Height="30"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        Margin="10,40,10,0"  Style="{DynamicResource SettingsBtnStyle}" >
+
+                    <!--add image-->
+                    <Image Source="../Assets/settings_icon.png"
+                              Width="20" Height="20">
+                    </Image>
+
+                </Button>
+
+            </StackPanel>
+
+            <!--add a header to the grid-->
+            <Grid 
+                  Grid.Row="0"
+                  Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  VerticalAlignment="Top"
+                  Background="#233C4F">
+
+         
+
+                <!--add an exit button-->
+                <Button Height="40"
+                        Width="40"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Right"
+                        Margin="0,0,20,0" Style="{DynamicResource CloseBtnStyle}" >
+
+               
+
+                </Button>
+
+            </Grid>
+
+            <Grid  Grid.Row="1" Grid.Column="1">
+                <ContentControl x:Name="Pages"
+                                Content="{Binding SelectedViewModel}"/>
+            </Grid>
+
+
+            <!--add the popup user control-->
+         
+
+        </Grid>
     </Grid>
+
 </Window>

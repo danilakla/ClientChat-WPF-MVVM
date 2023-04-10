@@ -2,6 +2,7 @@
 using ClientChat_WPF_MVVM.HttpClintContext;
 
 using ClientChat_WPF_MVVM.View;
+using ClientChat_WPF_MVVM.View.UserControllers.Chat;
 using ClientChat_WPF_MVVM.View.UserControllers.Preview;
 using ClientChat_WPF_MVVM.ViewModel;
 using Microsoft.Extensions.Configuration;
@@ -42,8 +43,17 @@ public partial class App : Application
                 services.AddSingleton<LoginViewModel>();
                 services.AddSingleton<RegistrationViewModel>();
                 services.AddSingleton<PreviewView>();
+
+
                 services.AddSingleton<ChatView>();
                 services.AddSingleton<ChatNavigationViewModel>();
+                
+                services.AddSingleton<WelcomeView>();
+                services.AddSingleton<WelcomeChatViewModel>();
+
+
+                services.AddSingleton<ProfileViewModel>();
+
 
 
             })

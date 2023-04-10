@@ -1,5 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:viewChat="clr-namespace:ClientChat_WPF_MVVM.View.UserControllers.Chat"
+
                     xmlns:view="clr-namespace:ClientChat_WPF_MVVM.View.UserControllers.Preview"
                     xmlns:viewmodel="clr-namespace:ClientChat_WPF_MVVM.ViewModel"
                     >
@@ -14,5 +16,13 @@
 
     <DataTemplate DataType="{x:Type viewmodel:RegistationUniverstityViewModel}">
         <view:RegistrationUniversityView/>
+    </DataTemplate>
+
+
+    <DataTemplate DataType="{x:Type viewmodel:WelcomeChatViewModel}">
+        <viewChat:WelcomeView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodel:ProfileViewModel}">
+        <viewChat:ProfileView/>
     </DataTemplate>
 </ResourceDictionary>   
