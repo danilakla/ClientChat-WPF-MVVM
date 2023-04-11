@@ -14,19 +14,7 @@ namespace ClientChat_WPF_MVVM.ViewModel
     {
 
 
-        private string _lastName;
-
-        public string Lastname
-        {
-            get { return _lastName; }
-            set
-            {
-                _lastName = value;
-
-                OnPropertyChanged("Lastname");
-            }
-        }
-
+    
 
         private string _email;
 
@@ -51,18 +39,7 @@ namespace ClientChat_WPF_MVVM.ViewModel
 
             }
         }
-        private string _name;
-
-        public string Name
-        {
-            get { return _name; }
-            set { _name = value; 
-                OnPropertyChanged("Name");
-
-            }
-        }
-
-
+    
         public LoginViewModel(IHost host)
         {
             ComeToChat = new TestCommand(host);

@@ -18,32 +18,7 @@
     <Border Background="#FFFFFF" Grid.Column="1" CornerRadius="0 10 10 0" >
         <StackPanel   VerticalAlignment="Center">
             <TextBlock  Text="Sign in to App" Foreground="#FF5F5BFF" Style="{StaticResource TitleText}" />
-            <TextBlock>Name</TextBlock>
-            <Border BorderBrush="#ACB0AF" BorderThickness="1" Margin="70 7" CornerRadius="5">
-                <Grid Margin="7 9">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-
-                    <Image Source="/Images/Email.png" Height="20" />
-
-                    <TextBox Name="TxtUser"  Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  Style="{StaticResource textBox}" />
-                </Grid>
-            </Border>
-            <TextBlock>Lastname</TextBlock>
-
-            <Border BorderBrush="#ACB0AF" BorderThickness="1" Margin="70 7" CornerRadius="5">
-                <Grid Margin="7 9">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-
-                    <Image Source="/Images/Email.png" Height="20" />
-                    <TextBox Text="{Binding Lastname, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"   Name="txtLastname" Style="{StaticResource textBox}" />
-                </Grid>
-            </Border>
+           
 
             <TextBlock>Email</TextBlock>
 
