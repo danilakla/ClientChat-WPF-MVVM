@@ -5,24 +5,29 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
 namespace ClientChat_WPF_MVVM.Commands
 {
-    class TestCommand : CommandBase
+    class TestCommand : CommandAsyncBase
     {
         private readonly IHost _host;
+        private readonly HttpClient _httpClient;
 
-        public TestCommand(IHost host )
+        public TestCommand(IHost host, HttpClient httpClient)
         {
             _host = host;
+            _httpClient = httpClient;
         }
-        public override void Execute(object parameter)
+        
+
+        public async override Task ExecuteAsync(object parameter)
         {
-            var currentWindow = _host.Services.GetRequiredService< ChatView >();
-            var context= _host.Services.GetRequiredService<ChatNavigationViewModel>();
+            var currentWindow = _host.Services.GetRequiredService<ChatView>();
+            var context = _host.Services.GetRequiredService<ChatNavigationViewModel>();
             currentWindow.DataContext = context;
             currentWindow.Show();
             Application.Current.MainWindow.Owner = currentWindow;

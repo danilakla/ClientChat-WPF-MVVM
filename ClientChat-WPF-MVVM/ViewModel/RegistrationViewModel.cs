@@ -60,6 +60,19 @@ namespace ClientChat_WPF_MVVM.ViewModel
 
             }
         }
+        private string _role;
+
+        public string Role
+        {
+            get { return _role; }
+            set
+            {
+                _role = value.Split(": ")[1];
+                OnPropertyChanged("Role");
+
+            }
+        }
+
 
         private string _registrationToken;
 

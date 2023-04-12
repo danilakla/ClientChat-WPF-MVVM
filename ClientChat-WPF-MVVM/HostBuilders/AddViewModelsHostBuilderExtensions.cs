@@ -1,5 +1,4 @@
-﻿using ClientChat_WPF_MVVM.HttpClintContext;
-using ClientChat_WPF_MVVM.View;
+﻿using ClientChat_WPF_MVVM.View;
 using ClientChat_WPF_MVVM.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;

@@ -72,6 +72,12 @@
                 </Grid>
             </Border>
 
+            <TextBlock>Role</TextBlock>
+            <ComboBox SelectedValue="{Binding Path=Role}" Margin="65 0">
+                <ComboBoxItem>Dean</ComboBoxItem>
+                <ComboBoxItem>Teacher</ComboBoxItem>
+                <ComboBoxItem>Student</ComboBoxItem>
+            </ComboBox>
             <TextBlock>Registration token</TextBlock>
 
             <Border BorderBrush="#ACB0AF" BorderThickness="1" Margin="70 7" CornerRadius="5">

@@ -3,6 +3,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Net.WebSockets;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,9 +41,9 @@ namespace ClientChat_WPF_MVVM.ViewModel
             }
         }
     
-        public LoginViewModel(IHost host)
+        public LoginViewModel(IHost host, HttpClient httpClient)
         {
-            ComeToChat = new TestCommand(host);
+            ComeToChat = new TestCommand(host,httpClient);
         }
         public ICommand ComeToChat { get; }
 

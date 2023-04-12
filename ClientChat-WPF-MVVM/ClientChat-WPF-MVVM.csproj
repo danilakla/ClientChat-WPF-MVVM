@@ -26,6 +26,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="6.0.14" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
   </ItemGroup>
@@ -38,8 +39,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Model\" />
-    <Folder Include="Services\" />
     <Folder Include="Strore\" />
     <Folder Include="Новая папка\" />
   </ItemGroup>

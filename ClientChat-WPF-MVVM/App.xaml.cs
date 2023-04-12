@@ -1,5 +1,4 @@
 ﻿using ClientChat_WPF_MVVM.HostBuilders;
-using ClientChat_WPF_MVVM.HttpClintContext;
 
 using ClientChat_WPF_MVVM.View;
 using ClientChat_WPF_MVVM.View.UserControllers.Chat;
@@ -31,13 +30,7 @@ public partial class App : Application
             .AddViewModels()
             .ConfigureServices((hostContext, services) =>
             {
-
-
-             
-
-
-
-                services.AddSingleton(new HttpConnection(hostContext.Configuration.GetValue<string>("ServerUrl")));
+                services.AddHttpClient();
                 services.AddSingleton<NavigationPreviewViewModel>();
                 services.AddSingleton<RegistationUniverstityViewModel>();
                 services.AddSingleton<LoginViewModel>();
