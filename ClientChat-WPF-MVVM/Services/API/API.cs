@@ -1,4 +1,4 @@
-﻿namespace ClientChat_WPF_MVVM.Infrastructure;
+﻿namespace ClientChat_WPF_MVVM.Services.API;
 
 public static class API
 {

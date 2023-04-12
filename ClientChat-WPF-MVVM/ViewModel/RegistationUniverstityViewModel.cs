@@ -1,12 +1,16 @@
-﻿using System;
+﻿using ClientChat_WPF_MVVM.Commands.PreviewCommands;
+using ClientChat_WPF_MVVM.Services;
+using ClientChat_WPF_MVVM.Services.API;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace ClientChat_WPF_MVVM.ViewModel
 {
-  public  class RegistationUniverstityViewModel:ViewModelBase
+    public  class RegistationUniverstityViewModel:ViewModelBase
     {
         private string _lastName;
 
@@ -80,9 +84,11 @@ namespace ClientChat_WPF_MVVM.ViewModel
             }
         }
 
-        public RegistationUniverstityViewModel()
+        public RegistationUniverstityViewModel(IRegistrationService registrationService, 
+            INavigationService navigationService)
         {
-
+            RegistrationUniversityCommand = new RegistrationUniversityCommand(registrationService,this, navigationService);
         }
+        public ICommand RegistrationUniversityCommand { get; }
     }
 }

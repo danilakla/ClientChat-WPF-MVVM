@@ -17,6 +17,10 @@
     <DataTemplate DataType="{x:Type viewmodel:RegistationUniverstityViewModel}">
         <view:RegistrationUniversityView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodel:ConfirmEmailViewModel}">
+        <view:ConfirmEmailView/>
+    </DataTemplate>
+
 
 
     <DataTemplate DataType="{x:Type viewmodel:WelcomeChatViewModel}">

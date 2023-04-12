@@ -1,8 +1,7 @@
-﻿
-using ClientChat_WPF_MVVM.DTO.Client;
+﻿using ClientChat_WPF_MVVM.DTO.Client;
 using System.Threading.Tasks;
 
-namespace ClientChat_WPF_MVVM.Services;
+namespace ClientChat_WPF_MVVM.Services.API;
 
 public interface IRegistrationService
 {

@@ -47,7 +47,7 @@
                 </Grid>
             </Border>
 
-            <Button  Content="Sign In" Style="{StaticResource mainButton}"  Command="{Binding ComeToChat}" />
+            <Button  Content="Sign In" Style="{StaticResource mainButton}"  Command="{Binding AuthenticationCommand}" />
         </StackPanel>
     </Border>
 

@@ -1,8 +1,12 @@
-﻿using System;
+﻿using ClientChat_WPF_MVVM.Commands.PreviewCommands;
+using ClientChat_WPF_MVVM.Services;
+using ClientChat_WPF_MVVM.Services.API;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace ClientChat_WPF_MVVM.ViewModel
 {
@@ -85,10 +89,10 @@ namespace ClientChat_WPF_MVVM.ViewModel
             }
         }
 
-        public RegistrationViewModel()
+        public RegistrationViewModel(IRegistrationService registrationService, INavigationService navigationService)
         {
-
+            RegistrationUserCommand = new RegistrationUserCommand(registrationService, this,navigationService);
         }
-
+        public ICommand RegistrationUserCommand { get; set; }
     }
 }

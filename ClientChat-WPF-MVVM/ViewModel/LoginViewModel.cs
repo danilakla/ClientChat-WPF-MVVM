@@ -1,4 +1,7 @@
 ﻿using ClientChat_WPF_MVVM.Commands;
+using ClientChat_WPF_MVVM.Commands.PreviewCommands;
+using ClientChat_WPF_MVVM.Services;
+using ClientChat_WPF_MVVM.Services.API;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
@@ -11,7 +14,7 @@ using System.Windows.Input;
 
 namespace ClientChat_WPF_MVVM.ViewModel
 {
- public   class LoginViewModel:ViewModelBase
+    public   class LoginViewModel:ViewModelBase
     {
 
 
@@ -41,11 +44,13 @@ namespace ClientChat_WPF_MVVM.ViewModel
             }
         }
     
-        public LoginViewModel(IHost host, HttpClient httpClient)
+        public LoginViewModel(IAuthenticationService authenticationService, INavigationService navigationService)
         {
-            ComeToChat = new TestCommand(host,httpClient);
+
+            AuthenticationCommand = new AuthenticationCommand(authenticationService, this , navigationService);
         }
-        public ICommand ComeToChat { get; }
+        public ICommand AuthenticationCommand { get; set; }
+
 
     }
 }
