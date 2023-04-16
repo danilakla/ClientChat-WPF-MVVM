@@ -27,7 +27,7 @@
                         </Style>
                     </StackPanel.Resources>
                     <Button Command="{Binding ElementName=Profile,Path=DataContext.ReloadProfileCommand}" Background="#5054b4" Foreground="White" Height="30" Width="30" >+</Button>
-                    <Button Background="#33335B" Foreground="White" Height="30" Width="30">_</Button>
+                    <Button Background="#5054b4" Foreground="White" Height="30" Width="30">_</Button>
                 </StackPanel>
             </Grid>
         </Border>
