@@ -20,7 +20,7 @@ namespace ClientChat_WPF_MVVM.ViewModel
 
     
 
-        private string _email;
+        private string _email= "danila.kla1@gmail.com";
 
         public string Email
         {
@@ -33,7 +33,7 @@ namespace ClientChat_WPF_MVVM.ViewModel
             }
         }
 
-        private string _password;
+        private string _password= "Yyyytyt123++";
 
         public string Password
         {

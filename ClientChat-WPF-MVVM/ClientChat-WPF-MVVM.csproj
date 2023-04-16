@@ -10,20 +10,37 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\60fwsUN8mEw.jpg" />
+    <None Remove="Assets\90.png" />
     <None Remove="Assets\close_icon.png" />
     <None Remove="Assets\home_icon.png" />
     <None Remove="Assets\profile_icon.png" />
     <None Remove="Assets\settings_icon.png" />
+    <None Remove="Assets\XUuQyYL4WOc.jpg" />
+    <None Remove="Assets\YB88qDGVZIg.jpg" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\60fwsUN8mEw.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\90.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\close_icon.png" />
     <Resource Include="Assets\home_icon.png" />
     <Resource Include="Assets\profile_icon.png" />
     <Resource Include="Assets\settings_icon.png" />
+    <Resource Include="Assets\XUuQyYL4WOc.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\YB88qDGVZIg.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="6.0.14" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
@@ -39,6 +56,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Commands\Новая папка\" />
     <Folder Include="Infrastructure\" />
     <Folder Include="Services\API\Новая папка\" />
     <Folder Include="Strore\" />

@@ -24,5 +24,11 @@ namespace ClientChat_WPF_MVVM.View.UserControllers.Chat
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            string url = "https://google.com";
+            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("cmd", $"/c start {url}") { CreateNoWindow = true });
+        }
     }
 }

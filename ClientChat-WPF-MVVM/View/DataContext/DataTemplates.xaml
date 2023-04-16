@@ -29,4 +29,8 @@
     <DataTemplate DataType="{x:Type viewmodel:ProfileViewModel}">
         <viewChat:ProfileView/>
     </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewmodel:ChatBarViewModel}">
+        <viewChat:ChatBarView/>
+    </DataTemplate>
 </ResourceDictionary>   

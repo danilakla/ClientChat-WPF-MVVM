@@ -24,7 +24,7 @@
     <Grid>
 
         <!--create a new grid-->
-        <Grid Margin="20" Background="#1C2F3E">
+        <Grid Margin="20" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition MaxWidth="60"/>
                 <ColumnDefinition/>
@@ -48,7 +48,7 @@
                         
                        Grid.RowSpan="2"
                         HorizontalAlignment="Stretch"
-                        Background="#14212B">
+                        Background="#111112">
 
                 <!--add 3 buttons - Home, Profile and Settings-->
 
@@ -58,7 +58,7 @@
                         
                         Background="Transparent"
                         BorderBrush="Transparent"
-                        Margin="10,60,10,0" Style="{DynamicResource HomeBtnStyle}" Command="{Binding ToProfileView}" >
+                        Margin="10,60,10,0" Style="{DynamicResource HomeBtnStyle}" Command="{Binding ToWelcomeViewCommand}" >
 
                     <!--add image-->
                     <Image Source="../Assets/home_icon.png"
@@ -66,12 +66,12 @@
                     </Image>
 
                 </Button>
-
+                
                 <Button x:Name="Profile"
                         Height="30"
                         Background="Transparent"
                         BorderBrush="Transparent"
-                        Margin="10,40,10, 0" Style="{DynamicResource ProfileBtnStyle}" >
+                        Margin="10,40,10, 0" Style="{DynamicResource ProfileBtnStyle}"  Command="{Binding ToProfileView}">
 
                     <!--add image-->
                     <Image Source="../Assets/profile_icon.png"
@@ -101,7 +101,8 @@
                   Grid.Column="0"
                   Grid.ColumnSpan="2"
                   VerticalAlignment="Top"
-                  Background="#233C4F">
+                 Background="#111112">
+                
 
          
 
@@ -120,9 +121,11 @@
 
             </Grid>
 
-            <Grid  Grid.Row="1" Grid.Column="1">
-                <ContentControl x:Name="Pages"
+            <Grid  Grid.Row="1" Grid.Column="1" >
+
+                    <ContentControl x:Name="Pages"
                                 Content="{Binding SelectedViewModel}"/>
+
             </Grid>
 
 

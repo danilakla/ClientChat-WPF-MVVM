@@ -5,63 +5,177 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ClientChat_WPF_MVVM.View.UserControllers.Chat"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+             d:DesignHeight="450" d:DesignWidth="800" Foreground="White">
+    <Grid Name="Profile">
 
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition MaxWidth="300"/>
+            <ColumnDefinition Width="0.3*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Grid  Background="MediumPurple" Grid.Row="0" Grid.Column="0" >
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition Height="50"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition MaxWidth="100"/>
-            </Grid.ColumnDefinitions>
-
-
-            <StackPanel Grid.Row="1" Grid.Column="0"
-                        Orientation="Horizontal"
-                        Style="{DynamicResource StackPanelStyle}">
-                <Image 
-                        Width="30" 
-                    Source="{Binding User.profileImage}"
-                        Height="30"
-                        Margin="18 0 0 0"/>
-                <StackPanel VerticalAlignment="Center">
-                    <Label Content="{Binding User.Email}"
-                                Style="{DynamicResource TextStyle}"
-                           FontWeight="SemiBold"
-                           Margin="0 -5 0 -5"/>
-
-                    <Label Content="Custom Status"
-                                Style="{DynamicResource TextStyle}"
-                           FontWeight="SemiBold"
-                           FontSize="10"
-                           Margin="0 -8 0 -5"/>
-                </StackPanel>
-
-            </StackPanel>
+        <Grid Grid.Row="0" Grid.Column="0">
+            <ContentControl x:Name="Pages"
+                                Content="{Binding ChatBarView}"/>
         </Grid>
-        <Grid Background="Black" Grid.Row="0" Grid.Column="1">
-            <StackPanel  VerticalAlignment="Center" HorizontalAlignment="Stretch" Orientation="Horizontal">
-                <StackPanel HorizontalAlignment="Left">
-                    <TextBlock Text="TEST"/>
-                </StackPanel>
 
-                <StackPanel HorizontalAlignment="Center">
-                    <TextBlock Text="TEST"/>
-                </StackPanel>
-                <StackPanel HorizontalAlignment="Right">
-                    <TextBlock Text="TEST"/>
-                </StackPanel>
+        <Grid Background="#FF232323" Grid.Row="0" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.4*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Canvas Grid.Row="0">
+                <Canvas.Background>
+                    <ImageBrush ImageSource="{Binding ProfileModel.UserDataModel.BackgroundProfile}"/>
+                </Canvas.Background>
+                <Border Background="#313136" Opacity="0.4" CornerRadius="12" Canvas.Right="10" Canvas.Top="10"  >
+                    <Border.InputBindings>
+                        
+                        <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding ChangeBgPhotoCommand }"/>
+                    </Border.InputBindings>
+                    <Border Width="40" Height="40"   >
+                    <Border.Background >
+                            <ImageBrush  ImageSource="    https://cdn-icons-png.flaticon.com/512/1250/1250615.png  "/>
+                    </Border.Background>
+                </Border>
+                    
+                </Border>
+                <Border Background="#313136" Opacity="0.4" CornerRadius="12" Canvas.Right="10" Canvas.Top="70"  >
+                    <Border.InputBindings>
 
-            </StackPanel>
+                        <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding ChangeIconCommand }"/>
+                    </Border.InputBindings>
+                    <Border Width="40" Height="40"   >
+                    <Border.Background >
+                            <ImageBrush  ImageSource="     https://cdn-icons-png.flaticon.com/512/1077/1077063.png  "/>
+                    </Border.Background>
+                </Border>
+                    
+                </Border>
 
+                <Border  Width="120" Height="120" CornerRadius="50" Canvas.Left="10" Canvas.Bottom="-50" >
+                    <Border.Background>
+                        <ImageBrush ImageSource="{Binding ProfileModel.UserDataModel.Photo}"/>
+                    </Border.Background>
+                </Border>
+            </Canvas>
+
+                <Grid Grid.Row="1" Margin="10 0 0 0" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition MaxWidth="400"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid Margin="0 60 0 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        
+                        <StackPanel Grid.Row="0" >
+                            <TextBlock FontSize="20" Text="{Binding ProfileModel.UserDataModel.Name}"/>
+                            <TextBlock FontSize="20" Padding="0 0 0 10" Text="{Binding ProfileModel.UserDataModel.LastName}"/>
+                            <TextBlock FontSize="20" Padding="0 0 0 10" Text="{Binding ProfileModel.UserDataModel.Email}"/>
+
+                            <Border BorderThickness="0 2 0 0" BorderBrush="#5054b4" Padding="0 10 0 0">
+                                <StackPanel>
+                                    <TextBlock>
+                                        Студент(ка) в уч. заведении
+                                    </TextBlock>
+                                    <TextBlock FontSize="14" TextWrapping="Wrap" Text="{Binding ProfileModel.UserDataModel.UniversityName}"/>
+
+                                </StackPanel> 
+                            </Border>
+
+                        </StackPanel>
+
+                        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="0 40 0 0" >
+                            <StackPanel  >
+                            <TextBlock FontSize="20">Skill</TextBlock>
+                                <ItemsControl ItemsSource="{Binding ProfileModel.SkillModels}" >
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Width="70" Margin="10" Padding="4" Background="gray" CornerRadius="10">
+                                            
+                                            <TextBlock TextAlignment="Center" Text="{Binding Text}"></TextBlock>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                        </ScrollViewer>
+
+                    </Grid>
+
+                </Grid>
+                <Grid Grid.Column="1" Margin="50 0 0 0">
+                    <Grid Margin="0 40 0 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" >
+                            <TextBlock TextAlignment="Center" FontSize="20" Margin="0 20">Projects</TextBlock>
+                            
+
+                        </Grid>
+                        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="0 0">
+
+                            <StackPanel  >
+
+                                <ItemsControl ItemsSource="{Binding ProfileModel.ProjectModels}" >
+                               
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                            <Border  Margin="10" Padding="4" Background="#292956" CornerRadius="10">
+
+                                            <StackPanel>
+                                                <Border BorderThickness="0 0 0 1" BorderBrush="White" Margin="0 0 0 10" Padding="6">
+                                                        <StackPanel>
+                                                            
+                                                            <TextBlock FontSize="18" HorizontalAlignment="Left" Text="{Binding Name}" ></TextBlock>
+
+
+                                                            <ItemsControl ItemsSource="{Binding urltech}" >
+                                                                <ItemsControl.ItemsPanel>
+                                                                    <ItemsPanelTemplate>
+                                                                        <WrapPanel />
+                                                                    </ItemsPanelTemplate>
+                                                                </ItemsControl.ItemsPanel>
+                                                                <ItemsControl.ItemTemplate>
+                                                                    <DataTemplate>
+                                                                        <Border Margin="5">
+                                                                            <Image Width="30"   Source="{Binding}"/>
+
+                                                                        </Border>
+                                                                    </DataTemplate>
+                                                                </ItemsControl.ItemTemplate>
+                                                            </ItemsControl>
+                                                        </StackPanel>
+                                                       
+
+                                                    </Border>
+                                                <TextBlock FontSize="14" HorizontalAlignment="Left" Text="{Binding Description}" TextWrapping="Wrap"/>
+                                                <Border HorizontalAlignment="left">
+
+                                                </Border>
+                                            </StackPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                        </ScrollViewer>
+
+                    </Grid>
+
+                </Grid>
+            </Grid>
 
         </Grid>
     </Grid>

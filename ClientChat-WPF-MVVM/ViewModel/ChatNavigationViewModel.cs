@@ -22,8 +22,12 @@ namespace ClientChat_WPF_MVVM.ViewModel
         {
             SelectedViewModel = welcomeChatViewModel;
             ToProfileView = new ToProfileViewCommand(profileViewModel, this);
+            ToWelcomeViewCommand = new ToWelcomeViewCommand(welcomeChatViewModel, this);
+
         }
         public ICommand ToProfileView { get; }
+        public ICommand ToWelcomeViewCommand { get; }
 
+        
     }
 }

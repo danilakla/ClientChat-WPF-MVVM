@@ -1,6 +1,9 @@
 ﻿using ClientChat_WPF_MVVM.HostBuilders;
 using ClientChat_WPF_MVVM.Services;
 using ClientChat_WPF_MVVM.Services.API;
+using ClientChat_WPF_MVVM.Services.API.Profile;
+using ClientChat_WPF_MVVM.Services.API.Project;
+using ClientChat_WPF_MVVM.Services.API.Skill;
 using ClientChat_WPF_MVVM.Services.TokenService;
 using ClientChat_WPF_MVVM.View;
 using ClientChat_WPF_MVVM.View.UserControllers.Chat;
@@ -47,6 +50,9 @@ public partial class App : Application
                 services.AddSingleton<ISerialization,  SerializationServices>();
                 services.AddSingleton<ITokenService,  TokenService>();
 
+                services.AddSingleton<IProfileService, ProfileService>();
+                services.AddSingleton<IProjectService, ProjectService>();
+                services.AddSingleton<ISkillService, SkillService>();
 
                 services.AddSingleton<ChatView>();
                 services.AddSingleton<ChatNavigationViewModel>();
@@ -55,11 +61,13 @@ public partial class App : Application
                 services.AddSingleton<WelcomeChatViewModel>();
 
 
-                services.AddSingleton<ProfileViewModel>();
+                services.AddTransient<ProfileViewModel>();
                 
                 services.AddSingleton<ConfirmEmailViewModel>();
 
-                
+                services.AddSingleton<ChatBarViewModel>();
+
+
 
 
 

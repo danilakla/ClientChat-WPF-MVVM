@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ClientChat_WPF_MVVM.View.UserControllers.Chat"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+             d:DesignHeight="450" d:DesignWidth="800" Foreground="White">
+    <Grid >
 
 
         <Grid.ColumnDefinitions>
@@ -14,54 +14,67 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Grid  Background="BlanchedAlmond" Grid.Row="0" Grid.Column="0" >
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition Height="50"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition MaxWidth="100"/>
-            </Grid.ColumnDefinitions>
-
-
-            <StackPanel Grid.Row="1" Grid.Column="0"
-                        Orientation="Horizontal"
-                        Style="{DynamicResource StackPanelStyle}">
-                <Image 
-                        Width="30" 
-                    Source="{Binding User.profileImage}"
-                        Height="30"
-                        Margin="18 0 0 0"/>
-                <StackPanel VerticalAlignment="Center">
-                    <Label Content="{Binding User.Email}"
-                                Style="{DynamicResource TextStyle}"
-                           FontWeight="SemiBold"
-                           Margin="0 -5 0 -5"/>
-
-                    <Label Content="Custom Status"
-                                Style="{DynamicResource TextStyle}"
-                           FontWeight="SemiBold"
-                           FontSize="10"
-                           Margin="0 -8 0 -5"/>
-                </StackPanel>
-
-            </StackPanel>
+        <Grid Grid.Row="0" Grid.Column="0">
+                    <ContentControl x:Name="Pages"
+                                Content="{Binding ChatBarView}"/>
         </Grid>
-        <Grid Background="green" Grid.Row="0" Grid.Column="1">
-            <StackPanel  VerticalAlignment="Center" HorizontalAlignment="Stretch" Orientation="Horizontal">
-                <StackPanel HorizontalAlignment="Left">
-                    <TextBlock Text="TEST"/>
-                </StackPanel>
 
-                <StackPanel HorizontalAlignment="Center">
-                    <TextBlock Text="TEST"/>
-                </StackPanel>
-                <StackPanel HorizontalAlignment="Right">
-                    <TextBlock Text="TEST"/>
-                </StackPanel>
 
+        <Grid Background="#FF232323" Grid.Row="0" Grid.Column="1" >
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="2*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" >
+                <StackPanel HorizontalAlignment="Center" Margin="0 40 0 0">
+                    <TextBlock Foreground="white" TextAlignment="Center" FontSize="30">Welcome to App</TextBlock>
+                    <TextBlock Foreground="white" TextAlignment="Center"  FontSize="15" >Here are some things to get you going</TextBlock>
+                </StackPanel>
             </StackPanel>
+            <StackPanel Grid.Row="1" >
+                <Grid>
+                    <Grid.Resources >
+                        <Style TargetType="Border" >
+                            <Setter Property="Margin" Value="10" />
+                        </Style>
+                    </Grid.Resources>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.Column="0" Background="#FF292929" CornerRadius="10">
+                            <StackPanel >
+                            <Image MaxWidth="150" MinHeight="150" Source="..\..\..\Assets\60fwsUN8mEw.jpg"/>
+                            <TextBlock TextAlignment="Center" FontSize="20">Start chatting</TextBlock>
+                        <TextBlock Margin="0 10 0 0" FontSize="15" TextAlignment="Center" TextWrapping="Wrap">Semd instant message, hsre emotions, an more over chat.</TextBlock>
+                    </StackPanel>
+                    </Border>
+                    <Border Grid.Column="1" Background="#FF292929" CornerRadius="10">
+                        <StackPanel >
+                            <Image MaxWidth="150" MinHeight="150" Source="..\..\..\Assets\XUuQyYL4WOc.jpg"/>
+                            <TextBlock TextAlignment="Center" FontSize="20">Start chatting</TextBlock>
+                            <TextBlock Margin="0 10 0 0" FontSize="15" TextAlignment="Center" TextWrapping="Wrap">Semd instant message, hsre emotions, an more over chat.</TextBlock>
+                        </StackPanel>
+                    </Border>
+                    <Border Grid.Column="2" Background="#FF292929" CornerRadius="10">
+                        <StackPanel >
+                            <Image MaxWidth="150" MinHeight="150" Source="..\..\..\Assets\YB88qDGVZIg.jpg"/>
+                            <TextBlock TextAlignment="Center" FontSize="20">Start chatting</TextBlock>
+                            <TextBlock Margin="0 20 0 0" Padding="20" FontSize="15" TextAlignment="Center" TextWrapping="Wrap" >Semd instant message, hsre emotions, an more over chat.</TextBlock>
+                        </StackPanel>
+                    </Border>
+               
 
+                </Grid>
+            </StackPanel>
+            <StackPanel Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0 20 0 0">
+
+                <TextBlock TextAlignment="Center" FontSize="20">Get the App web version</TextBlock>
+                <TextBlock TextAlignment="Center" FontSize="15">Stay connected across all your devices by downloading the app vie web application</TextBlock>
+                <Button Click="Button_Click" Background="Transparent" Foreground="White"  Padding="20" Margin="0 10 ">To Come</Button>
+            </StackPanel>
 
         </Grid>
     </Grid>
