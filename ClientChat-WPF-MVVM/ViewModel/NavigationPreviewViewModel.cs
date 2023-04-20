@@ -13,6 +13,8 @@ namespace ClientChat_WPF_MVVM.ViewModel
    public class NavigationPreviewViewModel:ViewModelBase
     {
 
+       
+
         private object _selectedViewModel;
         public object SelectedViewModel
         {
@@ -22,7 +24,8 @@ namespace ClientChat_WPF_MVVM.ViewModel
 
         public NavigationPreviewViewModel(LoginViewModel loginViewModel, 
             RegistrationViewModel registrationViewModel,
-            RegistationUniverstityViewModel registationUniverstityViewModel)
+            RegistationUniverstityViewModel registationUniverstityViewModel
+            )
         {
             SelectedViewModel = loginViewModel;
             ToRegistrationViewCommand = new ToRegistrationViewCommand(registrationViewModel, this, loginViewModel);

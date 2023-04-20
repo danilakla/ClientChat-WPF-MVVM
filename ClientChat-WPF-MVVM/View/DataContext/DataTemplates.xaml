@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:viewChat="clr-namespace:ClientChat_WPF_MVVM.View.UserControllers.Chat"
+                     xmlns:custmController="clr-namespace:ClientChat_WPF_MVVM.View.CustomControllers"
 
                     xmlns:view="clr-namespace:ClientChat_WPF_MVVM.View.UserControllers.Preview"
                     xmlns:viewmodel="clr-namespace:ClientChat_WPF_MVVM.ViewModel"
@@ -21,6 +22,22 @@
         <view:ConfirmEmailView/>
     </DataTemplate>
 
+
+    <DataTemplate DataType="{x:Type viewmodel:ChatRoomViewModel}">
+        <viewChat:ChatRoomView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewmodel:StartRoomViewModel}">
+        <viewChat:StartRoomView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewmodel:RoomViewModel}">
+        <viewChat:RoomView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewmodel:FindUserDialogViewModel}">
+        <custmController:ModalDialog/>
+    </DataTemplate>
 
 
     <DataTemplate DataType="{x:Type viewmodel:WelcomeChatViewModel}">

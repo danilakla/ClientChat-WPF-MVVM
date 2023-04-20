@@ -1,6 +1,7 @@
 ﻿using ClientChat_WPF_MVVM.HostBuilders;
 using ClientChat_WPF_MVVM.Services;
 using ClientChat_WPF_MVVM.Services.API;
+using ClientChat_WPF_MVVM.Services.API.Chat;
 using ClientChat_WPF_MVVM.Services.API.Profile;
 using ClientChat_WPF_MVVM.Services.API.Project;
 using ClientChat_WPF_MVVM.Services.API.Skill;
@@ -54,6 +55,12 @@ public partial class App : Application
                 services.AddSingleton<IProjectService, ProjectService>();
                 services.AddSingleton<ISkillService, SkillService>();
 
+
+                services.AddSingleton<IContactService, ContactService>();
+                services.AddSingleton<IChatService, ChatService>();
+                services.AddSingleton<INotificationService, NotificationService>();
+                services.AddSingleton<IFriendService, FriendService>();
+
                 services.AddSingleton<ChatView>();
                 services.AddSingleton<ChatNavigationViewModel>();
                 
@@ -66,6 +73,12 @@ public partial class App : Application
                 services.AddSingleton<ConfirmEmailViewModel>();
 
                 services.AddSingleton<ChatBarViewModel>();
+
+                services.AddSingleton<ChatRoomViewModel>();
+                services.AddSingleton<RoomViewModel>();
+                services.AddSingleton<StartRoomViewModel>();
+
+                services.AddSingleton<FindUserDialogViewModel>();
 
 
 

@@ -3,13 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ClientChat_WPF_MVVM.View"
+        xmlns:local="clr-namespace:ClientChat_WPF_MVVM.View" xmlns:customcontrollers="clr-namespace:ClientChat_WPF_MVVM.View.CustomControllers"
         mc:Ignorable="d"
         Title="ChatView" 
               Height="800" 
         Width="1400"
         WindowStartupLocation="CenterScreen"
-        Background="Transparent">
+        Background="Transparent" >
 
     <Window.Resources>
 
@@ -21,10 +21,10 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <Grid>
+    <Grid Name="NavigationChat">
 
         <!--create a new grid-->
-        <Grid Margin="20" >
+        <Grid Margin="20" Name="ChatWin">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition MaxWidth="60"/>
                 <ColumnDefinition/>
@@ -93,6 +93,21 @@
 
                 </Button>
 
+                <Button x:Name="Friends"
+                        Height="30"
+                        Command="{Binding OpenDialogFindUser}"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        Margin="10,40,10,0"  Style="{DynamicResource SettingsBtnStyle}" >
+
+                    <!--add image-->
+                    <Image Source="https://cdn-icons-png.flaticon.com/512/747/747579.png"
+                              Width="20" Height="20">
+                    
+                    </Image>
+
+                </Button>
+
             </StackPanel>
 
             <!--add a header to the grid-->
@@ -121,9 +136,11 @@
 
             </Grid>
 
-            <Grid  Grid.Row="1" Grid.Column="1" >
-
-                    <ContentControl x:Name="Pages"
+            <Grid  Grid.Row="1" Grid.Column="1"  >
+                <ContentControl  Panel.ZIndex="100"
+                                Visibility="{Binding VisibilityFindUserModal}"
+                                Content="{Binding FindUserDialog}"/>
+                <ContentControl x:Name="Pages" Panel.ZIndex="10"
                                 Content="{Binding SelectedViewModel}"/>
 
             </Grid>
