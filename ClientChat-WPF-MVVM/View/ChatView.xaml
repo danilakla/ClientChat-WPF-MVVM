@@ -84,10 +84,11 @@
                         Height="30"
                         Background="Transparent"
                         BorderBrush="Transparent"
+                        Command="{Binding ToNotificationView}"
                         Margin="10,40,10,0"  Style="{DynamicResource SettingsBtnStyle}" >
 
                     <!--add image-->
-                    <Image Source="../Assets/settings_icon.png"
+                    <Image Source="../Assets/3602156.png"
                               Width="20" Height="20">
                     </Image>
 

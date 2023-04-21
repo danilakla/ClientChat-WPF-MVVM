@@ -10,6 +10,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\1215092.png" />
+    <None Remove="Assets\3602156.png" />
     <None Remove="Assets\60fwsUN8mEw.jpg" />
     <None Remove="Assets\90.png" />
     <None Remove="Assets\close_icon.png" />
@@ -21,6 +23,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\1215092.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\3602156.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\60fwsUN8mEw.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

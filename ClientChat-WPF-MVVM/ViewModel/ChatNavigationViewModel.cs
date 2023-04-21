@@ -34,16 +34,18 @@ namespace ClientChat_WPF_MVVM.ViewModel
         }
 
         public ChatNavigationViewModel(WelcomeChatViewModel welcomeChatViewModel, ProfileViewModel profileViewModel, ChatRoomViewModel chatRoom,
-            FindUserDialogViewModel findUserDialogViewModel)
+            FindUserDialogViewModel findUserDialogViewModel, NotificationViewModel notificationViewModel)
         {
             FindUserDialog = findUserDialogViewModel;
             SelectedViewModel = welcomeChatViewModel;
             ToProfileView = new ToProfileViewCommand(profileViewModel, this);
             ToWelcomeViewCommand = new ToWelcomeViewCommand(chatRoom, this);
             OpenDialogFindUser=new OpenFindUserDialogCommand(this);
+           ToNotificationView= new ToNotificationViewCommand(this, notificationViewModel);
         }
 
         public ICommand OpenDialogFindUser { get; }
+        public ICommand ToNotificationView { get; }
 
         public ICommand ToProfileView { get; }
         public ICommand ToWelcomeViewCommand { get; }

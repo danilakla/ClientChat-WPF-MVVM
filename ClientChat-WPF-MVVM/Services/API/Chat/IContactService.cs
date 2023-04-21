@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ClientChat_WPF_MVVM.Services.API.Chat
 {
-    interface IContactService
+   public interface IContactService
     {
         Task<List<Contact>> GetContacts(string name, string lastName);
     }

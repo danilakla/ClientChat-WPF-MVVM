@@ -7,27 +7,104 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-    <Grid>
-        <Rectangle    Fill="Black"  Opacity="0.5" Height="Auto" Width="Auto">
+    <Grid x:Name="ContactModal">
+        <Rectangle    Fill="#FF2A3744"  Opacity="0.5" Height="Auto" Width="Auto">
             <Rectangle.InputBindings>
                 <MouseBinding MouseAction="LeftClick" Command="{Binding ElementName=NavigationChat, Path=DataContext.OpenDialogFindUser}"/>
             </Rectangle.InputBindings>
         </Rectangle>
-        <Border HorizontalAlignment="Center" Background="Black">
+        <Border HorizontalAlignment="Center" Background="#FF1D1D1D" MaxWidth="500"  MaxHeight="600" >
             <Grid>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="0.1*"/>
                     <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition Height="0.35*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Foreground="White">
+                <Grid>
+
+                    <TextBlock Foreground="White" TextAlignment='Center' FontSize="20">
                     Find Users
-                </TextBlock>
-                <TextBlock Foreground="White" Grid.Row="2">
-            <Button >
-                cLICK
-            </Button>
-                </TextBlock>
+                    </TextBlock>
+                </Grid>
+
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="0 40 0 0"  >
+                    <Border Padding="40 20 100 20" Width="400">
+                        <StackPanel >
+                                <StackPanel>
+                                    <ItemsControl ItemsSource="{Binding Contacts}"  >
+
+                                        <ItemsControl.ItemTemplate >
+                                            <DataTemplate >
+                                            <Border  BorderThickness="0 0 0 1" BorderBrush="#5054b4" Margin="0 0 0 50">
+
+                                                <StackPanel Orientation="Horizontal" >
+
+                                                    <Image  Source="../../Assets/90.png" Width="70" Height="70"  Margin="0 0 30 0">
+                                                       
+                                                    </Image>
+                                                    <StackPanel >
+                                                        <TextBlock Foreground="White" Margin="0 0 0 10" Text="{Binding Name}"/>
+                                                        <TextBlock Foreground="White" Margin="0 0 0 10" Text="{Binding LastName}"/>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <TextBlock Foreground="White" Margin="0 0 0 10">mail: </TextBlock>
+                                                            <TextBlock Foreground="White" Margin="0 0 0 10" Text="{Binding Email}"/>
+
+                                                        </StackPanel>
+                                                        <Button Foreground="White" Margin="0 0 0 10"  Background="#5054b4" Content="Send"
+                                                                Command="{Binding ElementName=ContactModal, Path=DataContext.SendNotificaitonCommand}" CommandParameter="{Binding Id}"
+                                                                />
+
+                                                    </StackPanel>
+
+                                                </StackPanel>
+                                            </Border>
+
+                                        </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+
+                                </StackPanel>
+                      
+                        </StackPanel>
+
+                    </Border>
+                 </ScrollViewer>
+                    <Grid Grid.Row="2">
+                    <StackPanel Width="auto">
+                        <Border Width="auto" >
+                           
+                            <StackPanel Margin="0 0 0 20">
+                                <TextBlock Foreground="White">Name</TextBlock>
+                                <TextBox  Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"   Foreground="White" Background="#FF242426" BorderThickness="0" Height="20" TextWrapping="Wrap">
+
+
+                                </TextBox>
+                            </StackPanel>
+
+
+                        </Border>
+
+                        <Border Width="auto" >
+
+                            <StackPanel Margin="0 0 0 20">
+                                <TextBlock Foreground="White">Last Name</TextBlock>
+                                <TextBox Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}"   Foreground="White" Background="#FF242426" BorderThickness="0" Height="20" TextWrapping="Wrap">
+
+
+                                </TextBox>
+                            </StackPanel>
+
+
+                        </Border>
+
+
+                        <Button HorizontalAlignment="Stretch" Command="{Binding FindContactsCommand}"  Background="#5054b4" Foreground="White" Grid.Row="2">
+                            Search
+                        </Button>
+                    </StackPanel>
+                   
+                </Grid>
+          
             </Grid>
         </Border>
     </Grid>

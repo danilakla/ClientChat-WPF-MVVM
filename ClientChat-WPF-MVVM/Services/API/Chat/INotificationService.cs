@@ -12,5 +12,7 @@ namespace ClientChat_WPF_MVVM.Services.API.Chat
     {
         Task SendNotification(CreateNotificationDTO createNotificationDTO);
         Task<List<Notification>> GetNotifications();
+
+        Task DeleteNotification(int id);
     }
 }

@@ -27,6 +27,26 @@ namespace ClientChat_WPF_MVVM.Services.API.Chat
             ChatApiHost = configuration["ApiHostChat"];
 
         }
+
+        public async Task DeleteNotification(int id)
+        {
+            try
+            {
+                string uri = uri = API.Chat.DeleteNotification(ChatApiHost, id);
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _tokenService.GetTokens().AccessToken);
+                var response = await _httpClient.DeleteAsync(uri);
+                response.EnsureSuccessStatusCode();
+
+              
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public async Task<List<Notification>> GetNotifications()
         {
             try
@@ -55,6 +75,7 @@ namespace ClientChat_WPF_MVVM.Services.API.Chat
         {
             try
             {
+                createNotificationDTO.FromWhom = "";
                 string uri = uri = API.Chat.SendNotification(ChatApiHost);
 
            

@@ -2,10 +2,24 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:viewChat="clr-namespace:ClientChat_WPF_MVVM.View.UserControllers.Chat"
                      xmlns:custmController="clr-namespace:ClientChat_WPF_MVVM.View.CustomControllers"
+             xmlns:notification="clr-namespace:ClientChat_WPF_MVVM.View.UserControllers.Notification"
 
                     xmlns:view="clr-namespace:ClientChat_WPF_MVVM.View.UserControllers.Preview"
                     xmlns:viewmodel="clr-namespace:ClientChat_WPF_MVVM.ViewModel"
                     >
+
+
+    <DataTemplate DataType="{x:Type viewmodel:NotificationBarViewModel}">
+        <notification:NotificationBarView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodel:SelectedNotificationViewModel}">
+        <notification:SelectedNotificationView/>
+    </DataTemplate>
+
+
+    <DataTemplate DataType="{x:Type viewmodel:NotificationViewModel}">
+        <notification:NotificationView/>
+    </DataTemplate>
 
     <DataTemplate DataType="{x:Type viewmodel:LoginViewModel}">
         <view:LoginView/>

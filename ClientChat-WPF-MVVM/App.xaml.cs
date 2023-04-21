@@ -80,6 +80,12 @@ public partial class App : Application
 
                 services.AddSingleton<FindUserDialogViewModel>();
 
+                services.AddSingleton<NotificationBarViewModel>();
+
+                services.AddSingleton<NotificationViewModel>();
+
+                services.AddSingleton<SelectedNotificationViewModel>();
+
 
 
 
