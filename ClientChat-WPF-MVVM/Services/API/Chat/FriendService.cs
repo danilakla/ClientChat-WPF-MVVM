@@ -49,6 +49,23 @@ namespace ClientChat_WPF_MVVM.Services.API.Chat
             }
         }
 
+        public async Task DeleteFriend(string nameRoom)
+        {
+            try
+            {
+                string uri = uri = API.Chat.DeleteFriend(ChatApiHost, nameRoom);
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _tokenService.GetTokens().AccessToken);
+                var response = await _httpClient.DeleteAsync(uri);
+                response.EnsureSuccessStatusCode();
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public async Task<List<Friend>> GetFriends()
         {
             try

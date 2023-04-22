@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:ClientChat_WPF_MVVM.View.UserControllers.Chat"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="300" Foreground="White">
-    <Grid  Background="#151518"  >
+    <Grid  Background="#151518" Name="BarChat" >
 
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
@@ -31,9 +31,54 @@
                 </StackPanel>
             </Grid>
         </Border>
-        <Grid Grid.Row="1">
-            <TextBlock Margin="0 20 0 0" TextWrapping="Wrap">Start a new private conversation here.</TextBlock>
-        </Grid>
+        <ScrollViewer Grid.Row="1"  VerticalScrollBarVisibility="Auto" Margin="0 20 0 0" >
+
+            <Border >
+             
+                <StackPanel >
+
+
+                    
+
+                    <ListView  Background="Transparent" BorderThickness="0" SelectedItem="{Binding  ElementName=ChatRoom, Path=DataContext.SelectedFriend}" ItemsSource="{Binding Friends}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate >
+                                <Border  Width="270"  Margin=" 0 0 0 20" >
+                                    <Border.InputBindings>
+
+                                        <MouseBinding MouseAction="LeftClick" Command="{Binding ElementName=ChatRoom, Path=DataContext.ToWelcomeViewCommand }" CommandParameter="{Binding ConversationName}"/>
+                                    </Border.InputBindings>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="70"/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Image Grid.Column="0"  Margin="0 0 20 0" Height="40" Width="40" Source="../../../Assets/90.png" HorizontalAlignment="Left"/>
+                                        <StackPanel Grid.Column="1" >
+                                            <StackPanel  Margin="0 0 0 10" Orientation="Horizontal">
+                                                <TextBlock Foreground="White"  FontWeight="ExtraBlack" Text="{Binding Name}" Margin="0 0 10 0"/>
+                                                <TextBlock Foreground="White" FontWeight="ExtraBlack" Text="{Binding LastName}"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock FontWeight="ExtraLight" Foreground="Gainsboro"  Text="email: "/>
+                                                <TextBlock FontWeight="ExtraLight" Foreground="Gainsboro"  Text="{Binding Email}"/>
+                                            </StackPanel>
+
+                                        </StackPanel>
+                                        <Button Command="{Binding ElementName=BarChat, Path=DataContext.DeleteFriendCommand}" CommandParameter="{Binding ConversationName}" Grid.Column="2" Width="30" BorderBrush="Transparent" Height="30" Background="Transparent" HorizontalAlignment="Right">
+                                            <Image Source="../../../Assets/1215092.png"/>
+                                        </Button>
+
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackPanel>
+            </Border>
+        </ScrollViewer>
+
         <Grid Grid.Row="2">
             <StackPanel>
                 

@@ -137,7 +137,7 @@
 
             </Grid>
 
-            <Grid  Grid.Row="1" Grid.Column="1"  >
+            <Grid  Grid.Row="1" Grid.Column="1" Name="ChatRoom" >
                 <ContentControl  Panel.ZIndex="100"
                                 Visibility="{Binding VisibilityFindUserModal}"
                                 Content="{Binding FindUserDialog}"/>

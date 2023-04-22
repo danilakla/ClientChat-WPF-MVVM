@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:ClientChat_WPF_MVVM.View.UserControllers.Chat"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid >
+    <Grid x:Name="ChatRoom" >
 
 
         <Grid.ColumnDefinitions>

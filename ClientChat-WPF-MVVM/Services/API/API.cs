@@ -44,6 +44,9 @@ public static class API
         public static string DeleteNotification(string baseUri, int id) => $"{baseUri}/delete-notification/{id}";
 
         public static string GetMessages(string baseUri,string roomName) => $"{baseUri}/get-messages/{roomName}";
+
+        public static string DeleteFriend(string baseUri, string room) => $"{baseUri}/delete-friend/{room}";
+
         
     }
 
