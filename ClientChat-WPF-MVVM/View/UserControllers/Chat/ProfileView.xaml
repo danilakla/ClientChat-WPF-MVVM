@@ -26,7 +26,8 @@
             </Grid.RowDefinitions>
             <Canvas Grid.Row="0">
                 <Canvas.Background>
-                    <ImageBrush ImageSource="{Binding ProfileModel.UserDataModel.BackgroundProfile}"/>
+                    
+                    <ImageBrush ImageSource="{Binding ProfileModel.UserDataModel.BackgroundProfile}"></ImageBrush>
                 </Canvas.Background>
                 <Border Background="#313136" Opacity="0.4" CornerRadius="12" Canvas.Right="10" Canvas.Top="10"  >
                     <Border.InputBindings>

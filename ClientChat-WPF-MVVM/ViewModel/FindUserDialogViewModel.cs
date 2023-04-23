@@ -1,6 +1,8 @@
 ﻿using ClientChat_WPF_MVVM.Commands.ContactModalCommands;
 using ClientChat_WPF_MVVM.Models.Chat;
 using ClientChat_WPF_MVVM.Services.API.Chat;
+using ClientChat_WPF_MVVM.Utils;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,9 +47,13 @@ namespace ClientChat_WPF_MVVM.ViewModel
         public ICommand SendNotificaitonCommand { get; set; }
 
         public ICommand FindContactsCommand { get; set; }
-        public FindUserDialogViewModel(INotificationService notificationService, IContactService contactService)
+        public FindUserDialogViewModel(INotificationService notificationService,
+            IContactService contactService,
+            IConfiguration configuration,
+            IImgService imgService
+            )
         {
-            FindContactsCommand = new FindContactsCommand(contactService, this);
+            FindContactsCommand = new FindContactsCommand(contactService, this, configuration,imgService);
             SendNotificaitonCommand = new SendNotificaitonCommand(this, notificationService);
         }
     }

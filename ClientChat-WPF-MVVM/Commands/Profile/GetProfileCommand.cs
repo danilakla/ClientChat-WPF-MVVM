@@ -1,7 +1,12 @@
-﻿using ClientChat_WPF_MVVM.Services.API.Profile;
+﻿using ClientChat_WPF_MVVM.Infrastructure;
+using ClientChat_WPF_MVVM.Services.API.Profile;
+using ClientChat_WPF_MVVM.Utils;
 using ClientChat_WPF_MVVM.ViewModel;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,18 +18,27 @@ public class GetProfileCommand : CommandAsyncBase
     private readonly IProfileService _profileService;
     private readonly ProfileViewModel _profileViewModel;
     private readonly string[] list;
+    private readonly IImgService _imgService;
+    private readonly IConfiguration _configuration;
 
-    public GetProfileCommand(IProfileService profileService, ProfileViewModel profileViewModel, string[ ]list )
+    public GetProfileCommand(IProfileService profileService,
+        ProfileViewModel profileViewModel, 
+        string[ ]list,
+        IImgService imgService,
+        IConfiguration configuration)
     {
         _profileService = profileService;
         _profileViewModel = profileViewModel;
         this.list = list;
+        _imgService = imgService;
+        _configuration = configuration;
     }
     public async override Task ExecuteAsync(object parameter)
     {
         try
         {
-    var profile = await _profileService.GetProfile();
+            var profile = await _profileService.GetProfile();
+            UserStore.Email=profile.UserDataModel.Email;
             #region
             foreach (var item in profile.ProjectModels)
             {
@@ -63,7 +77,17 @@ public class GetProfileCommand : CommandAsyncBase
             }
 
             #endregion
+            if (profile.UserDataModel.Photo is null)
+            {
+                
+                profile.UserDataModel.Photo=await _imgService.SetDefaultImage(_configuration["Icon"]);
 
+            }
+            if (profile.UserDataModel.BackgroundProfile is null)
+            {
+                profile.UserDataModel.BackgroundProfile = await _imgService.SetDefaultImage(_configuration["BackImg"]);
+
+            }
             _profileViewModel.ProfileModel = profile;
         }
         catch (Exception)

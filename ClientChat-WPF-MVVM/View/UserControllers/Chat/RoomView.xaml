@@ -6,7 +6,69 @@
              xmlns:local="clr-namespace:ClientChat_WPF_MVVM.View.UserControllers.Chat"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Foreground="white">
-    <Grid Background="#FF1F1F1E">
-        <TextBlock>Room view</TextBlock> 
+    <Grid Grid.Row="1" Grid.Column="1"  Background="#FF1F1F1E">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+            <RowDefinition Height="70"/>
+        </Grid.RowDefinitions>
+        <Border           
+
+                    BorderThickness="0 0 0 2">
+            <Grid HorizontalAlignment="Stretch"
+                  Background="#5054b4"
+                      Margin="8">
+                <Label Foreground="White" 
+                    Content="Danila Kartuzov"
+                   
+                           FontWeight="Bold"
+                           Margin="5 0 5 0"
+                           VerticalAlignment="Center"/>
+                <StackPanel HorizontalAlignment="Right"
+                                Orientation="Horizontal">
+            
+
+                 
+                </StackPanel>
+            </Grid>
+        </Border>
+            
+        <ListView 
+
+                      Background="Transparent"
+                      ItemContainerStyle="{StaticResource ChatItem}"
+                      Margin="8 0 0 0"
+                    ItemsSource="{Binding ElementName=ChatRoom, Path=DataContext.Messages}"
+                      Grid.Row="1"
+                      BorderThickness="0">
+
+        </ListView>
+
+
+        <Grid Grid.Row="2" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="90"/>
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Row="1"
+                           Height="50"
+                           Style="{StaticResource MessageBox}"
+                           Grid.ColumnSpan="2"/>
+            <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            Grid.Column="2"
+                            Margin="0 0 16 0">
+                <Button Width="20" Height="20" 
+                            Content="╳" 
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="Black"
+                            FontWeight="Bold"
+                            />
+
+            </StackPanel>
+
+        </Grid>
     </Grid>
+
 </UserControl>

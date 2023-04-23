@@ -9,41 +9,31 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ClientChat_WPF_MVVM.Commands.Chat;
-public class SelectRoomCommand : CommandAsyncBase
+public class GetMessagesCommand : CommandAsyncBase
 {
-    private readonly RoomViewModel _roomViewModel;
     private readonly ChatRoomViewModel _chatRoomViewModel;
     private readonly IChatService _chatService;
 
-    public SelectRoomCommand(RoomViewModel roomViewModel, ChatRoomViewModel chatRoomViewModel, IChatService chatService)
+    public GetMessagesCommand(ChatRoomViewModel chatRoomViewModel, IChatService chatService)
     {
-        _roomViewModel = roomViewModel;
         _chatRoomViewModel = chatRoomViewModel;
         _chatService = chatService;
     }
-    public async override Task ExecuteAsync(object parameter)
+    public override async Task ExecuteAsync(object parameter)
     {
         try
         {
-            if (_chatRoomViewModel.SelectedFriend is not null)
-            {
-var messages = await _chatService.GetMessages(_chatRoomViewModel.SelectedFriend.ConversationName);
-            if (messages is not null)
+            var messages = await _chatService.GetMessages(_chatRoomViewModel.SelectedFriend.ConversationName);
+            if(messages is not null)
             {
                 _chatRoomViewModel.Messages = new ObservableCollection<Message>(messages);
 
             }
-            _chatRoomViewModel.SelectedRoom = _roomViewModel;
-            }
-            
-
         }
         catch (Exception)
         {
 
             throw;
         }
-
     }
-
 }

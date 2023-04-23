@@ -11,6 +11,8 @@
 
                 <ResourceDictionary Source="./View/DataContext/DataTemplates.xaml"/>
                 <ResourceDictionary Source="./View/Themes/CustomScrollBar.xaml"/>
+                <ResourceDictionary Source="./View/Themes/MessageBox.xaml"/>
+                <ResourceDictionary Source="./View/Themes/ChatItem.xaml"/>
 
             </ResourceDictionary.MergedDictionaries>
 

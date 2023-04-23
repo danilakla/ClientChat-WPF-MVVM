@@ -1,15 +1,19 @@
 ﻿using ClientChat_WPF_MVVM.HostBuilders;
+using ClientChat_WPF_MVVM.Infrastructure;
 using ClientChat_WPF_MVVM.Services;
 using ClientChat_WPF_MVVM.Services.API;
 using ClientChat_WPF_MVVM.Services.API.Chat;
 using ClientChat_WPF_MVVM.Services.API.Profile;
 using ClientChat_WPF_MVVM.Services.API.Project;
 using ClientChat_WPF_MVVM.Services.API.Skill;
+using ClientChat_WPF_MVVM.Services.Hub;
 using ClientChat_WPF_MVVM.Services.TokenService;
+using ClientChat_WPF_MVVM.Utils;
 using ClientChat_WPF_MVVM.View;
 using ClientChat_WPF_MVVM.View.UserControllers.Chat;
 using ClientChat_WPF_MVVM.View.UserControllers.Preview;
 using ClientChat_WPF_MVVM.ViewModel;
+using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -45,11 +49,11 @@ public partial class App : Application
                 services.AddSingleton<PreviewView>();
 
                 services.AddSingleton<IAuthenticationService, AuthenticationService>();
-                services.AddSingleton<IRegistrationService,  RegistrationService>();
-                services.AddSingleton<INavigationService,  NavigationService>();
-                
-                services.AddSingleton<ISerialization,  SerializationServices>();
-                services.AddSingleton<ITokenService,  TokenService>();
+                services.AddSingleton<IRegistrationService, RegistrationService>();
+                services.AddSingleton<INavigationService, NavigationService>();
+
+                services.AddSingleton<ISerialization, SerializationServices>();
+                services.AddSingleton<ITokenService, TokenService>();
 
                 services.AddSingleton<IProfileService, ProfileService>();
                 services.AddSingleton<IProjectService, ProjectService>();
@@ -63,13 +67,13 @@ public partial class App : Application
 
                 services.AddSingleton<ChatView>();
                 services.AddSingleton<ChatNavigationViewModel>();
-                
+
                 services.AddSingleton<WelcomeView>();
                 services.AddSingleton<WelcomeChatViewModel>();
 
 
                 services.AddTransient<ProfileViewModel>();
-                
+
                 services.AddSingleton<ConfirmEmailViewModel>();
 
                 services.AddSingleton<ChatBarViewModel>();
@@ -85,9 +89,27 @@ public partial class App : Application
                 services.AddSingleton<NotificationViewModel>();
 
                 services.AddSingleton<SelectedNotificationViewModel>();
+                services.AddSingleton<IImgService,ImgService>();
+
+                //ws
+                services.AddScoped<WSSConnection>();
+                services.AddSingleton<Func<HubConnection>>(  () =>
+                {
+                    var tokenService = _host.Services.GetRequiredService<ITokenService>();
+
+                    var Connection = new HubConnectionBuilder()
+                        .WithUrl(hostContext.Configuration["ChatHub"], async option =>
+                             {
+                          option.AccessTokenProvider = async  () => await Task.FromResult(tokenService.GetTokens().AccessToken);
+
+                                     })
+                                     .WithAutomaticReconnect()
+                             .Build();
+                    return Connection;
+                });
 
 
-
+                services.AddSingleton<IMessageHub, MessageHub>();
 
 
 
@@ -101,15 +123,15 @@ public partial class App : Application
     {
         _host.Start();
 
-   
+
 
 
 
         MainWindow = _host.Services.GetRequiredService<PreviewView>();
         MainWindow.DataContext = _host.Services.GetRequiredService<NavigationPreviewViewModel>();
         MainWindow.Show();
-     
-       
+
+
 
         base.OnStartup(e);
     }

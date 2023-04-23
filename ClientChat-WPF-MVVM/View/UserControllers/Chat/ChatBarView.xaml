@@ -54,7 +54,7 @@
                                             <ColumnDefinition/>
                                             <ColumnDefinition/>
                                         </Grid.ColumnDefinitions>
-                                        <Image Grid.Column="0"  Margin="0 0 20 0" Height="40" Width="40" Source="../../../Assets/90.png" HorizontalAlignment="Left"/>
+                                        <Image Grid.Column="0"  Margin="0 0 20 0" Height="40" Width="40" Source="{Binding Photo}" HorizontalAlignment="Left"/>
                                         <StackPanel Grid.Column="1" >
                                             <StackPanel  Margin="0 0 0 10" Orientation="Horizontal">
                                                 <TextBlock Foreground="White"  FontWeight="ExtraBlack" Text="{Binding Name}" Margin="0 0 10 0"/>
@@ -66,7 +66,7 @@
                                             </StackPanel>
 
                                         </StackPanel>
-                                        <Button Command="{Binding ElementName=BarChat, Path=DataContext.DeleteFriendCommand}" CommandParameter="{Binding ConversationName}" Grid.Column="2" Width="30" BorderBrush="Transparent" Height="30" Background="Transparent" HorizontalAlignment="Right">
+                                        <Button  Command="{Binding ElementName=BarChat, Path=DataContext.DeleteFriendCommand}" CommandParameter="{Binding ConversationName}" Grid.Column="2" Width="20" BorderBrush="Transparent" Height="20" Background="Transparent" HorizontalAlignment="Right">
                                             <Image Source="../../../Assets/1215092.png"/>
                                         </Button>
 

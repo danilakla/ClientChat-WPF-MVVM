@@ -1,6 +1,8 @@
 ﻿using ClientChat_WPF_MVVM.Commands.Chat;
 using ClientChat_WPF_MVVM.Models.Chat;
 using ClientChat_WPF_MVVM.Services.API.Chat;
+using ClientChat_WPF_MVVM.Utils;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,10 +23,10 @@ public class ChatBarViewModel:ViewModelBase
         }
     }
 
-    public ChatBarViewModel(IFriendService  friendService)
+    public ChatBarViewModel(IFriendService  friendService, IConfiguration configuration, IImgService imgService)
     {
       
-        GetFriendsCommand = new GetFriendsCommand(this, friendService);
+        GetFriendsCommand = new GetFriendsCommand(this, friendService, configuration, imgService);
         DeleteFriendCommand = new DeleteFriendCommand(friendService, GetFriendsCommand);
         GetFriendsCommand.Execute(null);
     }

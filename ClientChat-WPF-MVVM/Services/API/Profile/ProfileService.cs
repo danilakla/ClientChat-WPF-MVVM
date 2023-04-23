@@ -73,7 +73,9 @@ public class ProfileService : IProfileService
 
     public async Task UpdatePhoto(OpenFileDialog openFileDialog)
     {
-        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _tokenService.GetTokens().AccessToken);
+        try
+        {
+   _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _tokenService.GetTokens().AccessToken);
         var uri = API.Profile.UpdateIconProfile(ProfileApiHost);
 
         await using var stream = openFileDialog.OpenFile();
@@ -87,24 +89,41 @@ public class ProfileService : IProfileService
         request.Content = content;
 
         var res = await _httpClient.SendAsync(request);
+            
+        }
+        catch (Exception)
+        {
+
+            throw;
+        }
+     
     }
 
     public async Task UpdatePhotoBack(OpenFileDialog openFileDialog)
     {
-        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _tokenService.GetTokens().AccessToken);
-        var uri = API.Profile.UpdateBgProfile(ProfileApiHost);
+        try
+        {
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _tokenService.GetTokens().AccessToken);
+            var uri = API.Profile.UpdateBgProfile(ProfileApiHost);
 
-        await using var stream = openFileDialog.OpenFile();
-        using var request = new HttpRequestMessage(HttpMethod.Put, uri);
-        using var content = new MultipartFormDataContent
+            await using var stream = openFileDialog.OpenFile();
+            using var request = new HttpRequestMessage(HttpMethod.Put, uri);
+            using var content = new MultipartFormDataContent
     {
         { new StreamContent(stream), "photo", openFileDialog.FileName }
     };
 
 
-        request.Content = content;
+            request.Content = content;
 
-        var res = await _httpClient.SendAsync(request);
+            var res = await _httpClient.SendAsync(request);
+        }
+        catch (Exception)
+        {
+
+            throw;
+        }
+      
     }
 
     public async Task UpdateProfile(UpdateProfileModel updateProfileViewModel)

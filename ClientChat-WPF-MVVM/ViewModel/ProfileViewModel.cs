@@ -1,7 +1,9 @@
 ﻿using ClientChat_WPF_MVVM.Commands.Profile;
 using ClientChat_WPF_MVVM.Models.Profile;
 using ClientChat_WPF_MVVM.Services.API.Profile;
+using ClientChat_WPF_MVVM.Utils;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -42,10 +44,10 @@ namespace ClientChat_WPF_MVVM.ViewModel
 
             };
 
-        public ProfileViewModel(ChatBarViewModel chatBarViewModel, IProfileService profileService)
+        public ProfileViewModel(ChatBarViewModel chatBarViewModel, IProfileService profileService, IConfiguration configuration, IImgService imgService)
         {
 
-            GetProfileCommand = new GetProfileCommand(profileService,this, list);
+            GetProfileCommand = new GetProfileCommand(profileService,this, list,imgService, configuration);
             ChangeIconCommand = new ChangeProfileIconCommand(profileService);
             ChangeBgPhotoCommand= new ChangePhotoBkProfile(profileService);
             ReloadProfileCommand=new ReloadProfileCommand(profileService,this, list); 

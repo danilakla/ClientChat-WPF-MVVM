@@ -15,6 +15,7 @@
     <None Remove="Assets\60fwsUN8mEw.jpg" />
     <None Remove="Assets\90.png" />
     <None Remove="Assets\close_icon.png" />
+    <None Remove="Assets\dcode-image.png" />
     <None Remove="Assets\home_icon.png" />
     <None Remove="Assets\profile_icon.png" />
     <None Remove="Assets\settings_icon.png" />
@@ -36,6 +37,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\close_icon.png" />
+    <Resource Include="Assets\dcode-image.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\home_icon.png" />
     <Resource Include="Assets\profile_icon.png" />
     <Resource Include="Assets\settings_icon.png" />
@@ -65,7 +69,6 @@
 
   <ItemGroup>
     <Folder Include="Commands\Новая папка\" />
-    <Folder Include="Infrastructure\" />
     <Folder Include="Services\API\Новая папка\" />
     <Folder Include="Strore\" />
     <Folder Include="Новая папка\" />
