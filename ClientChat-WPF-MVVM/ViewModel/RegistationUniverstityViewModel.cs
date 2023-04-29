@@ -21,7 +21,7 @@ namespace ClientChat_WPF_MVVM.ViewModel
             set
             {
                 _lastName = value;
-
+                IsVisibleError=Visibility.Collapsed;
                 OnPropertyChanged("Lastname");
             }
         }
@@ -35,6 +35,7 @@ namespace ClientChat_WPF_MVVM.ViewModel
             set
             {
                 _email = value;
+                IsVisibleError = Visibility.Collapsed;
 
                 OnPropertyChanged("Email");
             }
@@ -48,6 +49,8 @@ namespace ClientChat_WPF_MVVM.ViewModel
             set
             {
                 _password = value;
+                IsVisibleError = Visibility.Collapsed;
+
                 OnPropertyChanged("Password");
 
             }
@@ -60,6 +63,8 @@ namespace ClientChat_WPF_MVVM.ViewModel
             set
             {
                 _name = value;
+                IsVisibleError = Visibility.Collapsed;
+
                 OnPropertyChanged("Name");
 
             }
@@ -70,6 +75,8 @@ namespace ClientChat_WPF_MVVM.ViewModel
         {
             get { return _universityName; }
             set { _universityName = value;
+                IsVisibleError = Visibility.Collapsed;
+
                 OnPropertyChanged("UniversityName");
 
             }
@@ -81,6 +88,7 @@ namespace ClientChat_WPF_MVVM.ViewModel
         {
             get { return _address; }
             set { _address = value;
+                IsVisibleError = Visibility.Collapsed;
                 OnPropertyChanged("Address");
             }
         }
@@ -91,14 +99,41 @@ namespace ClientChat_WPF_MVVM.ViewModel
             set
             {
                 _visibility = value;
+
                 OnPropertyChanged("IsVisibleSpiner");
 
             }
         }
-        public RegistationUniverstityViewModel(IRegistrationService registrationService, 
-            INavigationService navigationService)
+
+
+        private string _error;
+
+        public string Error
         {
-            RegistrationUniversityCommand = new RegistrationUniversityCommand(registrationService,this, navigationService);
+            get { return _error; }
+            set
+            {
+                _error = value;
+                OnPropertyChanged("Error");
+
+            }
+        }
+        private Visibility _visibilityError = Visibility.Collapsed;
+        public Visibility IsVisibleError
+        {
+            get { return _visibilityError; }
+            set
+            {
+                _visibilityError = value;
+                OnPropertyChanged("IsVisibleError");
+
+            }
+        }
+        public RegistationUniverstityViewModel(IRegistrationService registrationService, 
+            INavigationService navigationService,
+            IValidationService validationService)
+        {
+            RegistrationUniversityCommand = new RegistrationUniversityCommand(registrationService,this, navigationService, validationService);
         }
         public ICommand RegistrationUniversityCommand { get; }
     }

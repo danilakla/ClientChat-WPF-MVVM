@@ -34,6 +34,7 @@ namespace ClientChat_WPF_MVVM.ViewModel
             set
             {
                 _lastName = value;
+                IsVisibleError = Visibility.Collapsed;
 
                 OnPropertyChanged("Lastname");
             }
@@ -47,6 +48,8 @@ namespace ClientChat_WPF_MVVM.ViewModel
             get { return _email; }
             set
             {
+                IsVisibleError = Visibility.Collapsed;
+
                 _email = value;
 
                 OnPropertyChanged("Email");
@@ -60,6 +63,8 @@ namespace ClientChat_WPF_MVVM.ViewModel
             get { return _password; }
             set
             {
+                IsVisibleError = Visibility.Collapsed;
+
                 _password = value;
                 OnPropertyChanged("Password");
 
@@ -72,6 +77,8 @@ namespace ClientChat_WPF_MVVM.ViewModel
             get { return _name; }
             set
             {
+                IsVisibleError = Visibility.Collapsed;
+
                 _name = value;
                 OnPropertyChanged("Name");
 
@@ -84,6 +91,8 @@ namespace ClientChat_WPF_MVVM.ViewModel
             get { return _role; }
             set
             {
+                IsVisibleError = Visibility.Collapsed;
+
                 _role = value.Split(": ")[1];
                 OnPropertyChanged("Role");
 
@@ -97,14 +106,37 @@ namespace ClientChat_WPF_MVVM.ViewModel
         {
             get { return _registrationToken; }
             set { _registrationToken = value;
+                IsVisibleError=Visibility.Collapsed;
                 OnPropertyChanged("RegistrationToken");
 
             }
         }
+        private string _error;
 
-        public RegistrationViewModel(IRegistrationService registrationService, INavigationService navigationService)
+        public string Error
         {
-            RegistrationUserCommand = new RegistrationUserCommand(registrationService, this,navigationService);
+            get { return _error; }
+            set
+            {
+                _error = value;
+                OnPropertyChanged("Error");
+
+            }
+        }
+        private Visibility _visibilityError = Visibility.Collapsed;
+        public Visibility IsVisibleError
+        {
+            get { return _visibilityError; }
+            set
+            {
+                _visibilityError = value;
+                OnPropertyChanged("IsVisibleError");
+
+            }
+        }
+        public RegistrationViewModel(IRegistrationService registrationService, INavigationService navigationService, IValidationService validationService)
+        {
+            RegistrationUserCommand = new RegistrationUserCommand(registrationService, this,navigationService, validationService);
         }
         public ICommand RegistrationUserCommand { get; set; }
     }

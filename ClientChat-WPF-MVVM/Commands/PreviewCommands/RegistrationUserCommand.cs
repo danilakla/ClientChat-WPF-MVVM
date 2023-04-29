@@ -19,12 +19,14 @@ public class RegistrationUserCommand : CommandAsyncBase
     private readonly IRegistrationService _registrationService;
     private readonly RegistrationViewModel _registrationViewModel;
     private readonly INavigationService _navigationService;
+    private readonly IValidationService _validationService;
 
-    public RegistrationUserCommand(IRegistrationService registrationService, RegistrationViewModel registrationViewModel, INavigationService navigationService)
+    public RegistrationUserCommand(IRegistrationService registrationService, RegistrationViewModel registrationViewModel, INavigationService navigationService, IValidationService validationService)
     {
         _registrationService = registrationService;
         _registrationViewModel = registrationViewModel;
         _navigationService = navigationService;
+        _validationService = validationService;
     }
     public async override Task ExecuteAsync(object parameter)
     {
@@ -41,7 +43,36 @@ public class RegistrationUserCommand : CommandAsyncBase
               Role= _registrationViewModel.Role 
               
             };
-              await _registrationService.RegistrationUser(userData);
+
+            if (_validationService.HasEmptyValue(userData.Email, 
+                userData.Password,
+                userData.Name,
+                userData.LastName,
+                userData.Role,
+                userData.AuthenticationToken
+                ))
+            {
+                _registrationViewModel.IsVisibleError = Visibility.Visible;
+                _registrationViewModel.Error = "There is some empty value";
+                throw new Exception("999");
+            }
+
+            if (!_validationService.HasValidPassword(userData.Password))
+            {
+                _registrationViewModel.IsVisibleError = Visibility.Visible;
+                _registrationViewModel.Error = "Unvalid Password";
+                throw new Exception("999");
+
+            }
+
+            if (!_validationService.HasValidEmail(userData.Email))
+            {
+                _registrationViewModel.IsVisibleError = Visibility.Visible;
+                _registrationViewModel.Error = "Unvalid Email";
+                throw new Exception("999");
+
+            }
+            await _registrationService.RegistrationUser(userData);
             _registrationViewModel.IsVisibleSpiner = Visibility.Collapsed;
 
             if (_registrationViewModel.Role == "Student")
@@ -54,20 +85,24 @@ public class RegistrationUserCommand : CommandAsyncBase
             }
 
         }
-        catch (Exception)
+        catch (Exception e)
         {
             _registrationViewModel.IsVisibleSpiner = Visibility.Collapsed;
 
-            Window window = new Window
+
+            if (!e.Message.Contains("999"))
             {
-                HorizontalAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Center,
-                Width = 300,
-                Height = 200,
-                Title = "Error",
-                Content = new Reject()
-            };
-            window.ShowDialog();
+                Window window = new Window
+                {
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center,
+                    Width = 300,
+                    Height = 200,
+                    Title = "Error",
+                    Content = new Reject()
+                };
+                window.ShowDialog();
+            }
         }
     }
 }

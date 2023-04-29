@@ -19,7 +19,7 @@ namespace ClientChat_WPF_MVVM.ViewModel
     {
 
 
-    
+            
 
         private string _email= "sany@mail.ru";
 
@@ -29,7 +29,8 @@ namespace ClientChat_WPF_MVVM.ViewModel
             set
             {
                 _email = value;
-               
+                IsVisibleError = Visibility.Collapsed;
+
                 OnPropertyChanged("Email");
             }
         }
@@ -40,10 +41,15 @@ namespace ClientChat_WPF_MVVM.ViewModel
         {
             get { return _password; }
             set { _password = value;
+                IsVisibleError=Visibility.Collapsed;
                 OnPropertyChanged("Password");
 
             }
         }
+
+
+
+   
         private Visibility _visibility= Visibility.Collapsed;
         public Visibility IsVisibleSpiner
         {
@@ -55,13 +61,38 @@ namespace ClientChat_WPF_MVVM.ViewModel
 
             }
         }
+        private string _error;
+
+        public string Error
+        {
+            get { return _error; }
+            set
+            {
+                _error = value;
+                OnPropertyChanged("Error");
+
+            }
+        }
+        private Visibility _visibilityError = Visibility.Collapsed;
+        public Visibility IsVisibleError
+        {
+            get { return _visibilityError; }
+            set
+            {
+                _visibilityError = value;
+                OnPropertyChanged("IsVisibleError");
+
+            }
+        }
 
 
-        
-        public LoginViewModel(IAuthenticationService authenticationService, INavigationService navigationService)
+
+
+
+        public LoginViewModel(IAuthenticationService authenticationService, INavigationService navigationService, IValidationService validationService)
         {
 
-            AuthenticationCommand = new AuthenticationCommand(authenticationService, this , navigationService);
+            AuthenticationCommand = new AuthenticationCommand(authenticationService, this , navigationService, validationService);
         }
         public ICommand AuthenticationCommand { get; set; }
 

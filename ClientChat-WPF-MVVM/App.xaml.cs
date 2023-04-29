@@ -58,6 +58,7 @@ public partial class App : Application
                 services.AddSingleton<IProfileService, ProfileService>();
                 services.AddSingleton<IProjectService, ProjectService>();
                 services.AddSingleton<ISkillService, SkillService>();
+                services.AddSingleton<IValidationService, ValidationService>();
 
 
                 services.AddSingleton<IContactService, ContactService>();

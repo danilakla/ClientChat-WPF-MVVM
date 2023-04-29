@@ -87,7 +87,7 @@
             </Grid>
             </Border>
 
-
+            <TextBlock Foreground="Red" TextAlignment="Center" Visibility="{Binding IsVisibleError}" Margin="0 10 0 0" Text="{Binding Error}"/>
             <Button  Content="Sign In" Style="{StaticResource mainButton}"  Command="{Binding AuthenticationCommand}" />
             <fa:ImageAwesome Icon="CircleOutlineNotch" Visibility="{Binding IsVisibleSpiner}" Margin="0 20 0 0" Spin="True" SpinDuration="2" Width="30" Height="30" />
 
