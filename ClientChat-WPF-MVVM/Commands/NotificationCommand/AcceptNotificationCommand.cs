@@ -1,9 +1,11 @@
 ﻿using ClientChat_WPF_MVVM.Services.API.Chat;
+using ClientChat_WPF_MVVM.View.UserControllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace ClientChat_WPF_MVVM.Commands.NotificationCommand
@@ -20,9 +22,25 @@ namespace ClientChat_WPF_MVVM.Commands.NotificationCommand
         }
         public async override Task ExecuteAsync(object parameter)
         {
-
-            await _friendService.AddFriend((int)parameter);
-            _deleteNotificationCommand.Execute(parameter);  
+            try
+            {
+                await _friendService.AddFriend((int)parameter);
+                _deleteNotificationCommand.Execute(parameter);
+            }
+            catch (Exception e)
+            {
+                Window window = new Window
+                {
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center,
+                    Width = 300,
+                    Height = 200,
+                    Title = "Error",
+                    Content = new Reject(e.Message)
+                };
+                window.ShowDialog();
+            }
+        
         }
     }
 }

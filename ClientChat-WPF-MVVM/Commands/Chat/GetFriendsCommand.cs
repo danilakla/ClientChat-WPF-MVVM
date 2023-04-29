@@ -1,5 +1,6 @@
 ﻿using ClientChat_WPF_MVVM.Services.API.Chat;
 using ClientChat_WPF_MVVM.Utils;
+using ClientChat_WPF_MVVM.View.UserControllers;
 using ClientChat_WPF_MVVM.ViewModel;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -7,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ClientChat_WPF_MVVM.Commands.Chat;
 public class GetFriendsCommand : CommandAsyncBase
@@ -28,6 +30,9 @@ public class GetFriendsCommand : CommandAsyncBase
 
         try
         {
+            _chatBarViewModel.IsVisibleSpiner = System.Windows.Visibility.Visible;
+            await Task.Delay(2000);
+
             var friends = await _friendService.GetFriends();
             foreach (var item in friends)
             {
@@ -37,11 +42,23 @@ public class GetFriendsCommand : CommandAsyncBase
                 }
             }
             _chatBarViewModel.Friends = friends;
+            _chatBarViewModel.IsVisibleSpiner = System.Windows.Visibility.Collapsed;
+
         }
-        catch (Exception)
+        catch (Exception e)
         {
 
-            throw;
+
+            Window window = new Window
+            {
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+                Width = 300,
+                Height = 200,
+                Title = "Error",
+                Content = new Reject(e.Message)
+            };
+            window.ShowDialog();
         }
     }
 }

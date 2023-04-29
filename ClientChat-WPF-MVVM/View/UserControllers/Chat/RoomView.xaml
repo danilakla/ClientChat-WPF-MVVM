@@ -18,17 +18,23 @@
             <Grid HorizontalAlignment="Stretch"
                   Background="#5054b4"
                       Margin="8">
-                <Label Foreground="White" 
-                    Content="Danila Kartuzov"
+              
+                <StackPanel HorizontalAlignment="Left"
+                                Orientation="Horizontal">
+
+                    <Label Foreground="White" 
+                    Content="{Binding ElementName=ChatRoom, Path=DataContext.SelectedFriend.Name}"
                    
                            FontWeight="Bold"
                            Margin="5 0 5 0"
                            VerticalAlignment="Center"/>
-                <StackPanel HorizontalAlignment="Right"
-                                Orientation="Horizontal">
-            
+                    <Label Foreground="White" 
+                    Content="{Binding ElementName=ChatRoom, Path=DataContext.SelectedFriend.LastName}"
+                   
+                           FontWeight="Bold"
+                           Margin="5 0 5 0"
+                           VerticalAlignment="Center"/>
 
-                 
                 </StackPanel>
             </Grid>
         </Border>

@@ -1,10 +1,12 @@
 ﻿using ClientChat_WPF_MVVM.Services.Hub;
+using ClientChat_WPF_MVVM.View.UserControllers;
 using ClientChat_WPF_MVVM.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ClientChat_WPF_MVVM.Commands.Hub;
 public class AwaitMessagesCommand : CommandAsyncBase
@@ -24,10 +26,20 @@ public class AwaitMessagesCommand : CommandAsyncBase
            await _messageHub.AwaitMessage(_chatRoomViewModel);
           
         }
-        catch (Exception)
+        catch (Exception e)
         {
 
-            throw;
+
+            Window window = new Window
+            {
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+                Width = 300,
+                Height = 200,
+                Title = "Error",
+                Content = new Reject(e.Message)
+            };
+            window.ShowDialog();
         }
     }
 }

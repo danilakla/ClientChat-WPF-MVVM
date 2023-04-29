@@ -8,15 +8,15 @@
              d:DesignHeight="450" d:DesignWidth="800" Foreground="white">
     <Grid Background="#FF1F1F1E">
         <Grid.RowDefinitions >
-            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="0.2*"/>
             <RowDefinition/>
             <RowDefinition Height="0.2*"/>
         </Grid.RowDefinitions>
 
         <Border BorderBrush="#5054b4" BorderThickness="0 0 0 1">
             <StackPanel Orientation="Horizontal" Margin="40 20 0 0">
-                <TextBlock FontSize="18"  Text="There is message from: "/>
-                <TextBlock FontSize="18" FontWeight="Bold" Text="{Binding ElementName=Notification, Path=DataContext.SelectedNotitfication.FromWhom}"/>
+                <TextBlock FontSize="18"  TextWrapping="Wrap"  Text="There is message from: "/>
+                <TextBlock TextWrapping="Wrap" FontSize="18" FontWeight="Bold" Text="{Binding ElementName=Notification, Path=DataContext.SelectedNotitfication.FromWhom}"/>
             </StackPanel>
         </Border>
         <Border  Grid.Row="1" BorderThickness="1 0 1 0" BorderBrush="#5054b4" Margin="40">

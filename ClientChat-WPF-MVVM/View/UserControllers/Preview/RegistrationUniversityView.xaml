@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ClientChat_WPF_MVVM.View.UserControllers.Preview"
+             xmlns:local="clr-namespace:ClientChat_WPF_MVVM.View.UserControllers.Preview" xmlns:fa="http://schemas.fontawesome.io/icons/"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="800">
     <UserControl.Resources>
@@ -20,89 +20,204 @@
             <TextBlock   Foreground="#FF5F5BFF" Style="{StaticResource TitleText}" >
                 Registration University     <LineBreak/>
             </TextBlock>
-            <TextBlock>Name</TextBlock>
-            <Border BorderBrush="#ACB0AF" BorderThickness="1" Margin="70 7" CornerRadius="5">
+            <Border BorderBrush="#ACB0AF" BorderThickness="0 0 0 1" Margin="70 0 70 0" CornerRadius="5">
+
                 <Grid Margin="7 9">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
+                    <TextBox  Style="{StaticResource textBox}" 
+                                     Name="NameInput"
+                                 
+                                     Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <TextBox.InputBindings>
+                            <KeyBinding Command="{Binding SendMessage}" CommandParameter="{Binding ElementName=ChatRoom, Path=DataContext.SelectedFriend}" Key="Return"/>
+                        </TextBox.InputBindings>
+                    </TextBox>
+                    <TextBlock IsHitTestVisible="False"
+                                       Text="@Name"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Margin="10 0 0 0"
+                                       Foreground="DarkGray">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Text, ElementName=NameInput}" Value="">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
 
-                    <Image Source="/Images/Email.png" Height="20" />
-
-                    <TextBox Name="TxtUser"  Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  Style="{StaticResource textBox}" />
+                    </TextBlock>
                 </Grid>
             </Border>
-            <TextBlock>Lastname</TextBlock>
+            <Border BorderBrush="#ACB0AF" BorderThickness="0 0 0 1" Margin="70 30 70 0" CornerRadius="5">
 
-            <Border BorderBrush="#ACB0AF" BorderThickness="1" Margin="70 7" CornerRadius="5">
                 <Grid Margin="7 9">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
+                    <TextBox  Style="{StaticResource textBox}" 
+                                     Name="LastNameInput"
+                                 
+                                     Text="{Binding Lastname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <TextBox.InputBindings>
+                            <KeyBinding Command="{Binding SendMessage}" CommandParameter="{Binding ElementName=ChatRoom, Path=DataContext.SelectedFriend}" Key="Return"/>
+                        </TextBox.InputBindings>
+                    </TextBox>
+                    <TextBlock IsHitTestVisible="False"
+                                       Text="@Lastname"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Margin="10 0 0 0"
+                                       Foreground="DarkGray">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Text, ElementName=LastNameInput}" Value="">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
 
-                    <Image Source="/Images/Email.png" Height="20" />
-                    <TextBox Text="{Binding Lastname, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"   Name="txtLastname" Style="{StaticResource textBox}" />
+                    </TextBlock>
+                </Grid>
+            </Border>
+            <Border BorderBrush="#ACB0AF" BorderThickness="0 0 0 1" Margin="70 30 70 0" CornerRadius="5">
+
+                <Grid Margin="7 9">
+                    <TextBox  Style="{StaticResource textBox}" 
+                                     Name="EmailInput"
+                                 
+                                     Text="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <TextBox.InputBindings>
+                            <KeyBinding Command="{Binding SendMessage}" CommandParameter="{Binding ElementName=ChatRoom, Path=DataContext.SelectedFriend}" Key="Return"/>
+                        </TextBox.InputBindings>
+                    </TextBox>
+                    <TextBlock IsHitTestVisible="False"
+                                       Text="@Email"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Margin="10 0 0 0"
+                                       Foreground="DarkGray">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Text, ElementName=EmailInput}" Value="">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+
+                    </TextBlock>
+                </Grid>
+            </Border>
+            <Border BorderBrush="#ACB0AF" BorderThickness="0 0 0 1" Margin="70 30 70 0" CornerRadius="5">
+
+                <Grid Margin="7 9">
+                    <TextBox  Style="{StaticResource textBox}" 
+                                     Name="PasswordInput"
+                                 
+                                     Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <TextBox.InputBindings>
+                            <KeyBinding Command="{Binding SendMessage}" CommandParameter="{Binding ElementName=ChatRoom, Path=DataContext.SelectedFriend}" Key="Return"/>
+                        </TextBox.InputBindings>
+                    </TextBox>
+                    <TextBlock IsHitTestVisible="False"
+                                       Text="@Password"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Margin="10 0 0 0"
+                                       Foreground="DarkGray">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Text, ElementName=PasswordInput}" Value="">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+
+                    </TextBlock>
                 </Grid>
             </Border>
 
-            <TextBlock>Email</TextBlock>
 
-            <Border BorderBrush="#ACB0AF" BorderThickness="1" Margin="70 7" CornerRadius="5">
+
+            <Border BorderBrush="#ACB0AF" BorderThickness="0 0 0 1" Margin="70 30 70 0" CornerRadius="5">
+
                 <Grid Margin="7 9">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
+                    <TextBox  Style="{StaticResource textBox}" 
+                                     Name="UniversityNameInput"
+                                 
+                                     Text="{Binding UniversityName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <TextBox.InputBindings>
+                            <KeyBinding Command="{Binding SendMessage}" CommandParameter="{Binding ElementName=ChatRoom, Path=DataContext.SelectedFriend}" Key="Return"/>
+                        </TextBox.InputBindings>
+                    </TextBox>
+                    <TextBlock IsHitTestVisible="False"
+                                       Text="@University Name"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Margin="10 0 0 0"
+                                       Foreground="DarkGray">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Text, ElementName=UniversityNameInput}" Value="">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
 
-                    <Image Source="/Images/Email.png" Height="20" />
-                    <TextBox Name="txtEmail"  Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource textBox}" />
-                </Grid>
-            </Border>
-            <TextBlock>Password</TextBlock>
-
-            <Border BorderBrush="#ACB0AF" BorderThickness="1" Margin="70 7" CornerRadius="5">
-                <Grid Margin="7 9">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-
-                    <Image Source="/Images/Lock.png" Height="20" />
-                    <TextBox Name="passwordBox" Style="{StaticResource textBox}"  Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"   />
-                </Grid>
-            </Border>
-
-            <TextBlock>University Name</TextBlock>
-
-            <Border BorderBrush="#ACB0AF" BorderThickness="1" Margin="70 7" CornerRadius="5">
-                <Grid Margin="7 9">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-
-                    <Image Source="/Images/Lock.png" Height="20" />
-                    <TextBox Name="UniversityName" Style="{StaticResource textBox}"  Text="{Binding UniversityName, UpdateSourceTrigger=PropertyChanged}"   />
+                    </TextBlock>
                 </Grid>
             </Border>
 
-            <TextBlock>Address</TextBlock>
 
-            <Border BorderBrush="#ACB0AF" BorderThickness="1" Margin="70 7" CornerRadius="5">
+
+            <Border BorderBrush="#ACB0AF" BorderThickness="0 0 0 1" Margin="70 30 70 0"  CornerRadius="5">
+
                 <Grid Margin="7 9">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
+                    <TextBox  Style="{StaticResource textBox}" 
+                                     Name="AddressInput"
+                                 
+                                     Text="{Binding Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <TextBox.InputBindings>
+                            <KeyBinding Command="{Binding SendMessage}" CommandParameter="{Binding ElementName=ChatRoom, Path=DataContext.SelectedFriend}" Key="Return"/>
+                        </TextBox.InputBindings>
+                    </TextBox>
+                    <TextBlock IsHitTestVisible="False"
+                                       Text="@Address"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Margin="10 0 0 0"
+                                       Foreground="DarkGray">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Text, ElementName=AddressInput}" Value="">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
 
-                    <Image Source="/Images/Lock.png" Height="20" />
-                    <TextBox Name="address" Style="{StaticResource textBox}"  Text="{Binding Address, UpdateSourceTrigger=PropertyChanged}"   />
+                    </TextBlock>
                 </Grid>
             </Border>
+
+     
 
             <Button  Content="Sign In" Style="{StaticResource mainButton}" Command="{Binding RegistrationUniversityCommand}" />
+            <fa:ImageAwesome Icon="CircleOutlineNotch" Visibility="{Binding IsVisibleSpiner}" Margin="0 20 0 0" Spin="True" SpinDuration="2" Width="30" Height="30" />
+
         </StackPanel>
     </Border>
 </UserControl>

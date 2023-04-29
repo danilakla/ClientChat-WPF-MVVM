@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace ClientChat_WPF_MVVM.ViewModel;
@@ -22,16 +23,27 @@ public class ChatBarViewModel:ViewModelBase
             OnPropertyChanged("Friends");
         }
     }
+    private Visibility _visibility = Visibility.Collapsed;
+    public Visibility IsVisibleSpiner
+    {
+        get { return _visibility; }
+        set
+        {
+            _visibility = value;
+            OnPropertyChanged("IsVisibleSpiner");
 
+        }
+    }
     public ChatBarViewModel(IFriendService  friendService, IConfiguration configuration, IImgService imgService)
     {
       
         GetFriendsCommand = new GetFriendsCommand(this, friendService, configuration, imgService);
         DeleteFriendCommand = new DeleteFriendCommand(friendService, GetFriendsCommand);
+        ReloadFriendCommand = new GetFriendsCommand(this, friendService, configuration, imgService);
         GetFriendsCommand.Execute(null);
     }
-    
-            public ICommand DeleteFriendCommand { get; set; }
+    public ICommand ReloadFriendCommand    { get; set; }
 
+    public ICommand DeleteFriendCommand { get; set; }
     public ICommand GetFriendsCommand { get; set; }
 }

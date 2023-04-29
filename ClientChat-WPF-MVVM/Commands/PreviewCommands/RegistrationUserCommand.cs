@@ -2,6 +2,7 @@
 using ClientChat_WPF_MVVM.DTO.Client;
 using ClientChat_WPF_MVVM.Services;
 using ClientChat_WPF_MVVM.Services.API;
+using ClientChat_WPF_MVVM.View.UserControllers;
 using ClientChat_WPF_MVVM.ViewModel;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -9,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Navigation;
 
 namespace ClientChat_WPF_MVVM.Commands.PreviewCommands;
@@ -28,7 +30,7 @@ public class RegistrationUserCommand : CommandAsyncBase
     {
         try
         {
-            
+            _registrationViewModel.IsVisibleSpiner = Visibility.Visible;
             var userData= new RegistrationUserDTO
             {
               Email=_registrationViewModel.Email,
@@ -40,6 +42,8 @@ public class RegistrationUserCommand : CommandAsyncBase
               
             };
               await _registrationService.RegistrationUser(userData);
+            _registrationViewModel.IsVisibleSpiner = Visibility.Collapsed;
+
             if (_registrationViewModel.Role == "Student")
             {
                 _navigationService.NavigateToChatView();
@@ -52,8 +56,18 @@ public class RegistrationUserCommand : CommandAsyncBase
         }
         catch (Exception)
         {
+            _registrationViewModel.IsVisibleSpiner = Visibility.Collapsed;
 
-            throw;
+            Window window = new Window
+            {
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+                Width = 300,
+                Height = 200,
+                Title = "Error",
+                Content = new Reject()
+            };
+            window.ShowDialog();
         }
     }
 }

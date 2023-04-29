@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ClientChat_WPF_MVVM.View.UserControllers.Chat"
+             xmlns:local="clr-namespace:ClientChat_WPF_MVVM.View.UserControllers.Chat" xmlns:fa="http://schemas.fontawesome.io/icons/"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="300" Foreground="White">
     <Grid  Background="#151518" Name="BarChat" >
@@ -17,17 +17,19 @@
         <Border Grid.Row="0" BorderThickness="0 0 0 2" BorderBrush="White">
             <Grid  >
                 <StackPanel HorizontalAlignment="Left">
+
                     <TextBlock Margin="5" FontSize="20">Chat</TextBlock >
 
                 </StackPanel>
+                <fa:ImageAwesome  Icon="CircleOutlineNotch" Foreground="White" Visibility="{Binding IsVisibleSpiner}" Spin="True" SpinDuration="2" Width="30" Height="30" />
+
                 <StackPanel  Orientation="Horizontal" HorizontalAlignment="Right">
                     <StackPanel.Resources>
                         <Style TargetType="Button">
                             <Setter  Property="Margin" Value="5"/>
                         </Style>
                     </StackPanel.Resources>
-                    <Button Command="{Binding ElementName=Profile,Path=DataContext.ReloadProfileCommand}" Background="#5054b4" Foreground="White" Height="30" Width="30" >+</Button>
-                    <Button Background="#5054b4" Foreground="White" Height="30" Width="30">_</Button>
+              
                 </StackPanel>
             </Grid>
         </Border>
@@ -36,9 +38,13 @@
             <Border >
              
                 <StackPanel >
+                    <Grid Margin="0 0 0 20">
+                        <Button HorizontalAlignment="Left" Command="{Binding ElementName=Profile,Path=DataContext.ReloadProfileCommand}" Background="#5054b4" Foreground="White" Height="30" Width="100" >profile</Button>
+                        <Button HorizontalAlignment="Right"  Command="{Binding  ReloadFriendCommand}" Background="#5054b4" Foreground="White" Height="30" Width="100" >friends</Button>
 
+                    </Grid>
+            
 
-                    
 
                     <ListView  Background="Transparent" BorderThickness="0" SelectedItem="{Binding  ElementName=ChatRoom, Path=DataContext.SelectedFriend}" ItemsSource="{Binding Friends}">
                         <ListView.ItemTemplate>
@@ -84,8 +90,8 @@
                 
             </StackPanel>
             <StackPanel VerticalAlignment="Bottom">
-                <Button Foreground="White"  Background="#5054b4">Invite</Button>
-
+                <Button Foreground="White"  Command="{Binding ElementName=ChatWin, Path=DataContext.OpenDialogFindUser}"  Background="#5054b4">Invite</Button>
+                
             </StackPanel>
         </Grid>
     </Grid>

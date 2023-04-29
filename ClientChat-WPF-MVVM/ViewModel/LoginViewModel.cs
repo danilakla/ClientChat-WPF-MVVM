@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Net.WebSockets;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace ClientChat_WPF_MVVM.ViewModel
@@ -20,7 +21,7 @@ namespace ClientChat_WPF_MVVM.ViewModel
 
     
 
-        private string _email= "te10@mail.ru";
+        private string _email= "sany@mail.ru";
 
         public string Email
         {
@@ -33,7 +34,7 @@ namespace ClientChat_WPF_MVVM.ViewModel
             }
         }
 
-        private string _password= "Yyyytyt554+";
+        private string _password= "Yyyytyt867++";
 
         public string Password
         {
@@ -43,7 +44,20 @@ namespace ClientChat_WPF_MVVM.ViewModel
 
             }
         }
-    
+        private Visibility _visibility= Visibility.Collapsed;
+        public Visibility IsVisibleSpiner
+        {
+            get { return _visibility; }
+            set
+            {
+                _visibility = value;
+                OnPropertyChanged("IsVisibleSpiner");
+
+            }
+        }
+
+
+        
         public LoginViewModel(IAuthenticationService authenticationService, INavigationService navigationService)
         {
 

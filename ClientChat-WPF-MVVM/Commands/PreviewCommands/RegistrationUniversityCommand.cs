@@ -1,12 +1,14 @@
 ﻿using ClientChat_WPF_MVVM.DTO.Client;
 using ClientChat_WPF_MVVM.Services;
 using ClientChat_WPF_MVVM.Services.API;
+using ClientChat_WPF_MVVM.View.UserControllers;
 using ClientChat_WPF_MVVM.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ClientChat_WPF_MVVM.Commands.PreviewCommands;
 internal class RegistrationUniversityCommand : CommandAsyncBase
@@ -29,6 +31,7 @@ internal class RegistrationUniversityCommand : CommandAsyncBase
     {
         try
         {
+            _registationUniverstityViewModel.IsVisibleSpiner = Visibility.Visible;
             var universityManager = new CreateUniversityDTO
             {
                 Address = _registationUniverstityViewModel.Address,
@@ -39,13 +42,25 @@ internal class RegistrationUniversityCommand : CommandAsyncBase
                 Password = _registationUniverstityViewModel.Password
             };
             await _registrationService.RegistrationUniversity(universityManager);
+            _registationUniverstityViewModel.IsVisibleSpiner = Visibility.Collapsed;
+
             _navigationService.NavigateToConfirmEmailView();
 
         }
         catch (Exception)
         {
+            _registationUniverstityViewModel.IsVisibleSpiner = Visibility.Collapsed;
 
-            throw;
+            Window window = new Window
+            {
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+                Width = 300,
+                Height = 200,
+                Title = "Error",
+                Content = new Reject()
+            };
+            window.ShowDialog();
         }
      
     }

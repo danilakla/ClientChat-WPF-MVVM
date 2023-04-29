@@ -1,6 +1,7 @@
 ﻿using ClientChat_WPF_MVVM.Models.Chat;
 using ClientChat_WPF_MVVM.Services.API.Chat;
 using ClientChat_WPF_MVVM.Utils;
+using ClientChat_WPF_MVVM.View.UserControllers;
 using ClientChat_WPF_MVVM.ViewModel;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -8,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ClientChat_WPF_MVVM.Commands.ContactModalCommands;
 internal class FindContactsCommand : CommandAsyncBase
@@ -28,19 +30,37 @@ internal class FindContactsCommand : CommandAsyncBase
     }
     public async override Task ExecuteAsync(object parameter)
     {
-        var name=_findUserDialogViewModel.Name;
-        var lastName=_findUserDialogViewModel.LastName;
-        var contacts = await _contactService.GetContacts(name,lastName);
-        if(contacts is not null)
+        try
         {
-            foreach (var item in contacts)
+            var name = _findUserDialogViewModel.Name;
+            var lastName = _findUserDialogViewModel.LastName;
+            var contacts = await _contactService.GetContacts(name, lastName);
+            if (contacts is not null)
             {
-                if ((item.Photo is null) || (item.Photo.Length == 0))
+                foreach (var item in contacts)
                 {
-                    item.Photo = await _imgService.SetDefaultImage(_configuration["Icon"]);
+                    if ((item.Photo is null) || (item.Photo.Length == 0))
+                    {
+                        item.Photo = await _imgService.SetDefaultImage(_configuration["Icon"]);
+                    }
                 }
+                _findUserDialogViewModel.Contacts = contacts;
             }
-            _findUserDialogViewModel.Contacts=contacts;
         }
+        catch (Exception e)
+        {
+
+            Window window = new Window
+            {
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+                Width = 300,
+                Height = 200,
+                Title = "Error",
+                Content = new Reject(e.Message)
+            };
+            window.ShowDialog();
+        }
+      
     }
 }

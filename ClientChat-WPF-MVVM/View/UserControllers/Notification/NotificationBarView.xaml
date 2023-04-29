@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ClientChat_WPF_MVVM.View.UserControllers.Notification"
+             xmlns:local="clr-namespace:ClientChat_WPF_MVVM.View.UserControllers.Notification" xmlns:fa="http://schemas.fontawesome.io/icons/"
              mc:Ignorable="d" 
                    d:DesignHeight="450" d:DesignWidth="300" Foreground="White">
     <Grid  Background="#151518"  >
@@ -21,13 +21,16 @@
                 </StackPanel>
                 
             </Grid>
+            
         </Border>
         <ScrollViewer Grid.Row="1"  VerticalScrollBarVisibility="Auto" Margin="0 20 0 0" >
             
                 <Border >
 
                 <StackPanel >
+                    <Button HorizontalAlignment="Center" Command="{Binding ElementName=Notification, Path=DataContext.ReloadNotificationCommand}" Background="#5054b4" Foreground="White" Height="30" Width="100" >Notification</Button>
 
+                    <fa:ImageAwesome Icon="CircleOutlineNotch"   Foreground="White" Margin="0 20 0 0" Visibility="{Binding ElementName=Notification, Path=DataContext.IsVisibleSpiner}" Spin="True" SpinDuration="2" Width="30" Height="30" />
 
 
                     <ListView  Background="Transparent" BorderThickness="0" SelectedItem="{Binding  ElementName=Notification, Path=DataContext.SelectedNotitfication}" ItemsSource="{Binding ElementName=Notification, Path=DataContext.Notifications}">

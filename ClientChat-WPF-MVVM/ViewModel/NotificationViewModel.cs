@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace ClientChat_WPF_MVVM.ViewModel;
@@ -57,6 +58,18 @@ public class NotificationViewModel:ViewModelBase
         }
     }
 
+    private Visibility _visibility = Visibility.Collapsed;
+    public Visibility IsVisibleSpiner
+    {
+        get { return _visibility; }
+        set
+        {
+            _visibility = value;
+            OnPropertyChanged("IsVisibleSpiner");
+
+        }
+    }
+
 
     public NotificationViewModel(NotificationBarViewModel notificationBarViewModel,
         SelectedNotificationViewModel  selectedNotificationViewModel,
@@ -72,13 +85,15 @@ public class NotificationViewModel:ViewModelBase
         this.GetNotifications = new GetNotificationsCommand(this, notificationService);
         ToSelectedNotification = new ToSelectedNotificationCommand(selectedNotificationViewModel,this);
         AcceptNotificationCommand=new AcceptNotificationCommand(this.DeleteNotificationCommand, friendService);
+        ReloadNotificationCommand = new GetNotificationsCommand(this,notificationService);
         GetNotifications.Execute(null);
 
     }
     
     public ICommand ToSelectedNotification { get; set; }
     public ICommand AcceptNotificationCommand { get; set; }
-
+    public ICommand ReloadNotificationCommand { get; set; }
+    
     public ICommand DeleteNotificationCommand{ get; set; }
     public ICommand GetNotifications { get; set; }
 
